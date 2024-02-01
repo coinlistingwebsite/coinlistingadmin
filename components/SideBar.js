@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 import Link from "next/link";
 import { HomeIcon, CreditCardIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+import { Edit, Verified } from "@mui/icons-material";
 
 const SideBar = forwardRef(({ showNav }, ref) => {
   const router = useRouter();
@@ -57,7 +58,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             }`}
           >
             <div className="mr-2">
-              <CreditCardIcon className="h-5 w-5" />
+              <Verified className="h-5 w-5" />
             </div>
             <div>
               <p className="text-sm">Approved Coins</p>
@@ -89,7 +90,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             }`}
           >
             <div className="mr-2">
-              <CreditCardIcon className="h-5 w-5" />
+              <Edit className="h-5 w-5" />
             </div>
             <div>
               <p className="text-sm">Edit Coins</p>

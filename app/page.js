@@ -1,9 +1,12 @@
-import Image from "next/image";
+import HomePage from "@/components/main/home-page";
+import { fetchAllCoins } from "@/lib/fetchData";
 
-export default function Home() {
+export default async function Home() {
+  const coinData = await fetchAllCoins();
+
   return (
-    <main >
-      
+    <main>
+      <HomePage coins={coinData} />
     </main>
   );
 }
