@@ -9,27 +9,33 @@ import {
   Twitter,
   YouTube,
 } from "@mui/icons-material";
-import { approveCoinById, deleteCoinbyId } from "@/lib/editData";
-
-const Modal = ({ coin }) => {
+import {
+  approveCoinById,
+  deleteApprovedCoinbyId,
+  deleteCoinbyId,
+  suspendCoinById,
+} from "@/lib/editData";
+const ModalApprovedCoins = ({ coin }) => {
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
 
-  const onApprove = async () => {
+  const onSuspend = async () => {
     setLoading2(true);
 
     const id = coin.id;
 
-    const response = await approveCoinById(id);
+    const response = await suspendCoinById(id);
 
     setLoading2(false);
 
     if (!response) {
-      alert("Error deleting coin from database");
+      alert("Error in suspending coin");
       return;
     }
 
-    alert("Coin request Approved - Close Modal and Refresh Page");
+    alert("Coin Suspended - Close Modal and Refresh Page");
   };
 
   const onDelete = async () => {
@@ -37,7 +43,7 @@ const Modal = ({ coin }) => {
 
     const id = coin.id;
 
-    const response = await deleteCoinbyId(id);
+    const response = await deleteApprovedCoinbyId(id);
 
     setLoading(false);
 
@@ -46,7 +52,7 @@ const Modal = ({ coin }) => {
       return;
     }
 
-    alert("Coin request successfully deleted - Close Modal and Refresh Page");
+    alert("Coin successfully deleted - Close Modal and Refresh Page");
   };
 
   return (
@@ -118,7 +124,7 @@ const Modal = ({ coin }) => {
                 Instagram URL
                 <Instagram className="ml-2" />
               </a>{" "}
-              : {coin.instagramURL}
+              : {coin.websiteURL}
             </>
           )}
         </div>
@@ -247,13 +253,14 @@ const Modal = ({ coin }) => {
         </div>
 
         <div className="flex flex-row gap-x-5 mt-7">
-          <button className="btn btn-info" onClick={onApprove}>
+          <button className="btn btn-info" onClick={onSuspend}>
             {loading2 && <span className="loading loading-spinner"></span>}
-            Approve Request
+            Suspend Coin
           </button>
+
           <button className="btn btn-error text-white" onClick={onDelete}>
             {loading && <span className="loading loading-spinner"></span>}
-            Delete Request
+            Delete Coin From Database
           </button>
         </div>
 
@@ -269,4 +276,4 @@ const Modal = ({ coin }) => {
   );
 };
 
-export default Modal;
+export default ModalApprovedCoins;

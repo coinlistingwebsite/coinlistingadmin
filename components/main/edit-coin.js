@@ -11,10 +11,9 @@ import {
   unPromoteCoinById,
 } from "@/lib/editData";
 import VerifiedIcon from "@mui/icons-material/Verified";
+import ModalEdit from "../sub/modal-edit";
 
-const ApprovedCoin = ({ coinsData }) => {
-  // console.log(coins);
-
+const EditCoin = ({ coinsData }) => {
   const [coins, setCoins] = useState(coinsData);
   const [search, setSearch] = useState("");
   const [modalDetails, setModalDetails] = useState([]);
@@ -38,41 +37,6 @@ const ApprovedCoin = ({ coinsData }) => {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const addVotes = async (id) => {
-    const response = await addVotesToCoin(id);
-
-    if (!response) {
-      alert("Error in adding votes to coin - Please try again");
-      return;
-    }
-
-    alert(
-      "500 votes have been successfully added - close modal and refresh page"
-    );
-  };
-
-  const promotedCoin = async (id) => {
-    const response = await promotedCoinById(id);
-
-    if (!response) {
-      alert("Error in promoting coin - Please try again");
-      return;
-    }
-
-    alert("Coin Promoted - close modal and refresh page");
-  };
-
-  const unpromoteCoin = async (id) => {
-    const response = await unPromoteCoinById(id);
-
-    if (!response) {
-      alert("Error in promoting coin - Please try again");
-      return;
-    }
-
-    alert("Coin Promoted - close modal and refresh page");
-  };
-
   if (coins.length == 0) {
     <div>loading..</div>;
   }
@@ -82,9 +46,9 @@ const ApprovedCoin = ({ coinsData }) => {
       <div className="flex flex-row gap-x-10">
         <div className="stats shadow">
           <div className="stat">
-            <div className="stat-title text-primary">Approved Coins</div>
+            <div className="stat-title text-primary">All Coins</div>
             <div className="stat-value text-secondary">{coinsData.length}</div>
-            <div className="stat-desc">Approve / Delete Requests</div>
+            <div className="stat-desc">Edit Coin Data</div>
           </div>
         </div>
 
@@ -110,7 +74,7 @@ const ApprovedCoin = ({ coinsData }) => {
       </div>
 
       <dialog id="my_modal_1" className="modal">
-        <ModalApprovedCoins coin={modalDetails} />
+        <ModalEdit coin={modalDetails} />
       </dialog>
 
       <div className="overflow-x-auto mt-5">
@@ -122,10 +86,8 @@ const ApprovedCoin = ({ coinsData }) => {
               <th>Chain/Presale</th>
               <th>Submitted by</th>
               <th>Votes</th>
-              <th>Add Votes to coin</th>
-              <th>Promote / Unpromote Coin</th>
 
-              <th></th>
+              <th>Edit Coin</th>
             </tr>
           </thead>
           <tbody>
@@ -182,33 +144,7 @@ const ApprovedCoin = ({ coinsData }) => {
                   </a>
                 </td>
                 <td>{coin.votes}</td>
-                <td>
-                  <button
-                    className="btn btn-info btn-wide"
-                    onClick={() => addVotes(coin.id)}
-                  >
-                    <AddCircleOutlineIcon />
-                    Add 500 Votes
-                  </button>
-                </td>
-                <td>
-                  {coin.promoted ? (
-                    <button
-                      onClick={() => unpromoteCoin(coin.id)}
-                      className="btn btn-wide btn-neutral"
-                    >
-                      Remove Promotion
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => promotedCoin(coin.id)}
-                      className="btn btn-wide btn-success  text-white"
-                    >
-                      <VerifiedIcon className="ml-2" />
-                      Promote Coin
-                    </button>
-                  )}
-                </td>
+
                 <th>
                   <button
                     onClick={() => {
@@ -217,7 +153,7 @@ const ApprovedCoin = ({ coinsData }) => {
                     }}
                     className="btn btn-active btn-primary"
                   >
-                    View Details
+                    Edit Details
                   </button>
                 </th>
               </tr>
@@ -229,4 +165,4 @@ const ApprovedCoin = ({ coinsData }) => {
   );
 };
 
-export default ApprovedCoin;
+export default EditCoin;

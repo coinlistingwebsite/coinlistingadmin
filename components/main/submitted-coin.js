@@ -47,6 +47,7 @@ const SubmittedCoin = ({ coins }) => {
               <th>Coin Name / Symbol</th>
               <th>Chain/Presale</th>
               <th>Submitted by</th>
+              <th>Votes</th>
               <th></th>
             </tr>
           </thead>
@@ -97,6 +98,7 @@ const SubmittedCoin = ({ coins }) => {
                     Contact via <TelegramIcon />
                   </a>
                 </td>
+                <td>{coin.votes}</td>
                 <th>
                   <button
                     onClick={() => {
