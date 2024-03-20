@@ -40,7 +40,7 @@ const PromotedCoin = ({ coins }) => {
       </dialog>
 
       <div className="overflow-x-auto mt-10">
-        <table className="table min-w-[1000px] table-zebra">
+        <table className="table min-w-[1000px]">
           {/* head */}
           <thead>
             <tr>

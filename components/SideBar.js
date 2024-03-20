@@ -25,9 +25,6 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                 : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
             }`}
           >
-            <div className="mr-2">
-              <HomeIcon className="h-5 w-5" />
-            </div>
             <div>
               <p>Home</p>
             </div>
@@ -41,9 +38,6 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                 : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
             }`}
           >
-            <div className="mr-2">
-              <UserIcon className="h-5 w-5" />
-            </div>
             <div>
               <p className="text-sm">Submitted Coins</p>
             </div>
@@ -57,30 +51,24 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                 : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
             }`}
           >
-            <div className="mr-2">
-              <Verified className="h-5 w-5" />
-            </div>
             <div>
               <p className="text-sm">Approved Coins</p>
             </div>
           </div>
         </Link>
-        {/* <Link href="/promotedcoins">
+        <Link href="/createmeetup">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/orders"
+              router.pathname == "/createmeetup"
                 ? "bg-orange-100 text-orange-500"
                 : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
             }`}
           >
-            <div className="mr-2">
-              <CreditCardIcon className="h-5 w-5" />
-            </div>
             <div>
-              <p className="text-sm">Promoted Coins</p>
+              <p className="text-sm">Create Meetup</p>
             </div>
           </div>
-        </Link> */}
+        </Link>
         <Link href="/editcoins">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
@@ -89,9 +77,6 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                 : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
             }`}
           >
-            <div className="mr-2">
-              <Edit className="h-5 w-5" />
-            </div>
             <div>
               <p className="text-sm">Edit Coins</p>
             </div>

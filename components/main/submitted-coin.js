@@ -6,8 +6,7 @@ import Modal from "../sub/modal";
 import { Refresh } from "@mui/icons-material";
 
 const SubmittedCoin = ({ coins }) => {
-  // console.log(coins);
-  const [modalDetails, setModalDetails] = useState([]);
+  const [modalDetails, setModalDetails] = useState(coins[0]);
 
   if (coins.length == 0) {
     <div>loading..</div>;
@@ -30,7 +29,6 @@ const SubmittedCoin = ({ coins }) => {
             window.location.reload(true);
           }}
         >
-          <Refresh />
           Refresh Page
         </button>
       </div>
@@ -40,8 +38,7 @@ const SubmittedCoin = ({ coins }) => {
       </dialog>
 
       <div className="overflow-x-auto mt-10">
-        <table className="table min-w-[1000px] table-zebra bg-white">
-          {/* head */}
+        <table className="table min-w-[1000px] bg-base-300 table-zebra">
           <thead>
             <tr>
               <th>Coin Name / Symbol</th>
@@ -59,7 +56,7 @@ const SubmittedCoin = ({ coins }) => {
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <img
-                          src={coin.logoURL}
+                          src={coin.logo}
                           alt="Avatar Tailwind CSS Component"
                           className="rounded-xl"
                         />
@@ -72,7 +69,7 @@ const SubmittedCoin = ({ coins }) => {
                   </div>
                 </td>
                 <td>
-                  {coin.chain}
+                  {coin.platform}
                   <br />
                   <span>
                     {coin.presale ? (
@@ -82,18 +79,16 @@ const SubmittedCoin = ({ coins }) => {
                         </span>
                       </>
                     ) : (
-                      <span className="badge badge-ghost badge-sm">
-                        No Presale
-                      </span>
+                      <span className="badge badge-ghost badge-sm">Token</span>
                     )}
                   </span>
                 </td>
                 <td>
-                  {coin.email}
+                  {coin.email || "No Email"}
                   <br />
                   <a
                     className="badge badge-secondary badge-sm"
-                    href={`https://t.me/${coin.telegramContact}`}
+                    href={`https://t.me/${coin.urls.telegramContact}`}
                   >
                     Contact via <TelegramIcon />
                   </a>

@@ -1,20 +1,12 @@
 "use client";
-import { data } from "@/hugs";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { useEffect, useState } from "react";
-import { Refresh } from "@mui/icons-material";
 import ModalApprovedCoins from "../sub/modal-approved-coins";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import {
-  addVotesToCoin,
-  promotedCoinById,
-  unPromoteCoinById,
-} from "@/lib/editData";
+
 import VerifiedIcon from "@mui/icons-material/Verified";
+import { promotedCoinNow, unPromoteCoinNow } from "@/lib/editData";
 
 const ApprovedCoin = ({ coinsData }) => {
-  // console.log(coins);
-
   const [coins, setCoins] = useState(coinsData);
   const [search, setSearch] = useState("");
   const [modalDetails, setModalDetails] = useState([]);
@@ -38,21 +30,8 @@ const ApprovedCoin = ({ coinsData }) => {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const addVotes = async (id) => {
-    const response = await addVotesToCoin(id);
-
-    if (!response) {
-      alert("Error in adding votes to coin - Please try again");
-      return;
-    }
-
-    alert(
-      "500 votes have been successfully added - close modal and refresh page"
-    );
-  };
-
-  const promotedCoin = async (id) => {
-    const response = await promotedCoinById(id);
+  const promotedCoin = async (coin) => {
+    const response = await promotedCoinNow(coin);
 
     if (!response) {
       alert("Error in promoting coin - Please try again");
@@ -62,15 +41,15 @@ const ApprovedCoin = ({ coinsData }) => {
     alert("Coin Promoted - close modal and refresh page");
   };
 
-  const unpromoteCoin = async (id) => {
-    const response = await unPromoteCoinById(id);
+  const unpromoteCoin = async (coin) => {
+    const response = await unPromoteCoinNow(coin);
 
     if (!response) {
-      alert("Error in promoting coin - Please try again");
+      alert("Error in unpromoting coin - Please try again");
       return;
     }
 
-    alert("Coin Promoted - close modal and refresh page");
+    alert("Coin UnPromoted - close modal and refresh page");
   };
 
   if (coins.length == 0) {
@@ -94,7 +73,6 @@ const ApprovedCoin = ({ coinsData }) => {
             window.location.reload(true);
           }}
         >
-          <Refresh />
           Refresh Page
         </button>
       </div>
@@ -114,7 +92,7 @@ const ApprovedCoin = ({ coinsData }) => {
       </dialog>
 
       <div className="overflow-x-auto mt-5">
-        <table className="table min-w-[1000px] table-zebra bg-white">
+        <table className="table min-w-[1000px] table-zebra bg-base-300">
           {/* head */}
           <thead>
             <tr>
@@ -122,7 +100,7 @@ const ApprovedCoin = ({ coinsData }) => {
               <th>Chain/Presale</th>
               <th>Submitted by</th>
               <th>Votes</th>
-              <th>Add Votes to coin</th>
+
               <th>Promote / Unpromote Coin</th>
 
               <th></th>
@@ -136,7 +114,7 @@ const ApprovedCoin = ({ coinsData }) => {
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <img
-                          src={coin.logoURL}
+                          src={coin.logo}
                           alt="Avatar Tailwind CSS Component"
                           className="rounded-xl"
                         />
@@ -155,7 +133,8 @@ const ApprovedCoin = ({ coinsData }) => {
                   </div>
                 </td>
                 <td>
-                  {coin.chain}
+                  {coin.platform}
+
                   <br />
                   <span>
                     {coin.presale ? (
@@ -165,44 +144,32 @@ const ApprovedCoin = ({ coinsData }) => {
                         </span>
                       </>
                     ) : (
-                      <span className="badge badge-ghost badge-sm">
-                        No Presale
-                      </span>
+                      <span className="badge badge-accent badge-sm">Token</span>
                     )}
                   </span>
                 </td>
                 <td>
-                  {coin.email}
-                  <br />
                   <a
-                    className="badge badge-secondary badge-sm"
-                    href={`https://t.me/${coin.telegramContact}`}
+                    className="badge badge-primary badge-md"
+                    href={`https://t.me/${coin.urls.telegramContact}`}
                   >
-                    Contact via <TelegramIcon />
+                    <TelegramIcon />
                   </a>
                 </td>
                 <td>{coin.votes}</td>
+
                 <td>
-                  <button
-                    className="btn btn-info btn-wide"
-                    onClick={() => addVotes(coin.id)}
-                  >
-                    <AddCircleOutlineIcon />
-                    Add 500 Votes
-                  </button>
-                </td>
-                <td>
-                  {coin.promoted ? (
+                  {coin.approved ? (
                     <button
-                      onClick={() => unpromoteCoin(coin.id)}
-                      className="btn btn-wide btn-neutral"
+                      onClick={() => unpromoteCoin(coin)}
+                      className="btn btn-wide btn-secondary"
                     >
                       Remove Promotion
                     </button>
                   ) : (
                     <button
-                      onClick={() => promotedCoin(coin.id)}
-                      className="btn btn-wide btn-success  text-white"
+                      onClick={() => promotedCoin(coin)}
+                      className="btn btn-wide btn-accent"
                     >
                       <VerifiedIcon className="ml-2" />
                       Promote Coin

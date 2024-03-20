@@ -2,7 +2,6 @@
 import { data } from "@/hugs";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { useEffect, useState } from "react";
-import { Refresh } from "@mui/icons-material";
 import ModalApprovedCoins from "../sub/modal-approved-coins";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {
@@ -53,12 +52,11 @@ const EditCoin = ({ coinsData }) => {
         </div>
 
         <button
-          className="btn btn-accent btn-active text-white btn-wide my-auto"
+          className="btn btn-accent btn-wide my-auto"
           onClick={() => {
             window.location.reload(true);
           }}
         >
-          <Refresh />
           Refresh Page
         </button>
       </div>
@@ -73,18 +71,14 @@ const EditCoin = ({ coinsData }) => {
         />
       </div>
 
-      <dialog id="my_modal_1" className="modal">
-        <ModalEdit coin={modalDetails} />
-      </dialog>
-
       <div className="overflow-x-auto mt-5">
-        <table className="table min-w-[1000px] table-zebra bg-white">
+        <table className="table min-w-[1000px] table-zebra bg-base-300">
           {/* head */}
           <thead>
             <tr>
               <th>Coin Name / Symbol</th>
               <th>Chain/Presale</th>
-              <th>Submitted by</th>
+
               <th>Votes</th>
 
               <th>Edit Coin</th>
@@ -98,7 +92,7 @@ const EditCoin = ({ coinsData }) => {
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <img
-                          src={coin.logoURL}
+                          src={coin.logo}
                           alt="Avatar Tailwind CSS Component"
                           className="rounded-xl"
                         />
@@ -127,34 +121,20 @@ const EditCoin = ({ coinsData }) => {
                         </span>
                       </>
                     ) : (
-                      <span className="badge badge-ghost badge-sm">
-                        No Presale
-                      </span>
+                      <span className="badge badge-accent badge-sm">Token</span>
                     )}
                   </span>
                 </td>
-                <td>
-                  {coin.email}
-                  <br />
-                  <a
-                    className="badge badge-secondary badge-sm"
-                    href={`https://t.me/${coin.telegramContact}`}
-                  >
-                    Contact via <TelegramIcon />
-                  </a>
-                </td>
+
                 <td>{coin.votes}</td>
 
                 <th>
-                  <button
-                    onClick={() => {
-                      setModalDetails(coin);
-                      document.getElementById("my_modal_1").showModal();
-                    }}
+                  <a
+                    href={`/coin/${coin.id}`}
                     className="btn btn-active btn-primary"
                   >
                     Edit Details
-                  </button>
+                  </a>
                 </th>
               </tr>
             ))}

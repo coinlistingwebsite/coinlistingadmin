@@ -1,14 +1,6 @@
+"use client";
 import React, { useState } from "react";
 
-import TelegramIcon from "@mui/icons-material/Telegram";
-import LanguageIcon from "@mui/icons-material/Language";
-import {
-  Facebook,
-  Instagram,
-  Reddit,
-  Twitter,
-  YouTube,
-} from "@mui/icons-material";
 import { editCoin } from "@/lib/editData";
 
 const ModalEdit = ({ coin }) => {
@@ -21,43 +13,57 @@ const ModalEdit = ({ coin }) => {
     const presale = formData.get("presale");
     const votes = formData.get("votes");
     const address = formData.get("address");
-    const chain = formData.get("chain");
+    const platform = formData.get("platform");
+    const cmc_id = formData.get("cmc_id");
     const description = formData.get("description");
+    const explorer = formData.get("explorer");
+    const facebook = formData.get("facebook");
+    const source_code = formData.get("source_code");
+    const technical_doc = formData.get("technical_doc");
+    const reddit = formData.get("reddit");
+    const twitter = formData.get("twitter");
+    const website = formData.get("website");
+    const instagram = formData.get("instagram");
+    const youtube = formData.get("youtube");
+    const telegram = formData.get("telegram");
     const telegramContact = formData.get("telegramContact");
-    const telegramURL = formData.get("telegramURL");
-    const websiteURL = formData.get("websiteURL");
-    const instagramURL = formData.get("instagramURL");
-    const youtubeURL = formData.get("youtubeURL");
-    const twitterURL = formData.get("twitterURL");
-    const facebookURL = formData.get("facebookURL");
-    const discordURL = formData.get("discordURL");
-    const redditURL = formData.get("redditURL");
-    const auditURL = formData.get("auditURL");
-    const doxxURL = formData.get("doxxURL");
-    const kycURL = formData.get("kycURL");
-    const safuURL = formData.get("safuURL");
+    const audit = formData.get("audit");
+    const doxx = formData.get("doxx");
+    const safu = formData.get("safu");
+    const kyc = formData.get("kyc");
+    const bmc_audit = formData.get("bmc_audit");
+    const bmc_audit_score = formData.get("bmc_audit_score");
+
+    setLoading(true);
 
     const response = await editCoin(
       !presale ? coin.presale : presale,
+      !address ? coin.contract_address : address,
       !votes ? coin.votes : votes,
-      !address ? coin.contractAddress : address,
-      !chain ? coin.chain : chain,
+      !platform ? coin.platform : platform,
+      !cmc_id ? coin.cmc_id : cmc_id,
       !description ? coin.description : description,
-      !telegramContact ? coin.telegramContact : telegramContact,
-      !telegramURL ? coin.telegramURL : telegramURL,
-      !websiteURL ? coin.websiteURL : websiteURL,
-      !instagramURL ? coin.instagramURL : instagramURL,
-      !youtubeURL ? coin.youtubeURL : youtubeURL,
-      !twitterURL ? coin.twitterURL : twitterURL,
-      !facebookURL ? coin.facebookURL : facebookURL,
-      !discordURL ? coin.discordURL : discordURL,
-      !redditURL ? coin.redditURL : redditURL,
-      !auditURL ? coin.auditURL : auditURL,
-      !doxxURL ? coin.doxxURL : doxxURL,
-      !kycURL ? coin.kycURL : kycURL,
-      !safuURL ? coin.safuURL : safuURL,
-      coin.id
+      !explorer ? coin.urls.explorer : explorer,
+      !facebook ? coin.urls.facebook : facebook,
+      !source_code ? coin.urls.source_code : source_code,
+      !technical_doc ? coin.urls.technical_doc : technical_doc,
+      !reddit ? coin.urls.reddit : reddit,
+      !twitter ? coin.urls.twitter : twitter,
+      !website ? coin.urls.website : website,
+      !instagram ? coin.urls.instagram : instagram,
+      !youtube ? coin.urls.youtube : youtube,
+      !telegram ? coin.urls.telegram : telegram,
+      !telegramContact ? coin.urls.telegramContact : telegramContact,
+      !audit ? coin.urls.audit : audit,
+      !doxx ? coin.urls.doxx : doxx,
+      !safu ? coin.urls.safu : safu,
+      !kyc ? coin.urls.kyc : kyc,
+      !bmc_audit ? coin.bmc_audit : bmc_audit,
+      !bmc_audit_score ? coin.bmc_audit_score : bmc_audit_score,
+      coin
     );
+
+    setLoading(false);
 
     if (!response) {
       alert("Error in updating coin - Please try again");
@@ -66,16 +72,14 @@ const ModalEdit = ({ coin }) => {
 
     alert("Coin Updated successfully - close modal and refresh page");
 
-//    formData.reset();
-document.getElementById("form").reset(); 
-   // window.location.reload(true);
+    //  window.location.reload(true);
   }
 
   return (
     <>
-      <div className="modal-box max-w-[800px]">
+      <div className="w-full">
         <div className="flex flex-row">
-          <img src={coin.logoURL} className="rounded-xl w-24 h-24" />
+          <img src={coin.logo} className="rounded-xl w-24 h-24" />
 
           <span className="my-auto text-2xl ml-5">
             {coin.coinName}
@@ -90,47 +94,49 @@ document.getElementById("form").reset();
         </div>
 
         <form onSubmit={handleSubmit} id="form">
-          <div className="my-3">
+          {/* <div className="my-3">
             <span className="my-auto">Presale</span>
             <select
               name="presale"
               className="select select-bordered select-sm ml-2"
             >
-              <option disabled selected>
-                {coin.presale ? "True" : "False"}
-              </option>
-              <option value={true}>True</option>
-              <option value={false}>False</option>
+              <option disabled>{coin.presale ? "True" : "False"}</option>
+              <option value={1}>True</option>
+              <option value={0}>False</option>
             </select>
-          </div>
+          </div> */}
 
-          <div className="my-3">
-            Contract Address :{" "}
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
               name="address"
-              placeholder={coin.contractAddress}
-              className="input input-bordered w-full max-w-xs input-sm"
+              placeholder={`Contract Address :  ${
+                coin.contract_address || "Empty"
+              }`}
+              className="input input-bordered w-full"
             />
-          </div>
 
-          <div className="my-3">
-            Votes :{" "}
             <input
               type="text"
               name="votes"
-              placeholder={coin.votes}
-              className="input input-bordered w-full max-w-xs input-sm"
+              placeholder={`Edit Votes :  ${coin.votes || "No Votes"}`}
+              className="input input-bordered w-full"
             />
           </div>
 
-          <div className="my-3">
-            Coin Chain :{" "}
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
-              name="chain"
-              placeholder={coin.chain}
-              className="input input-bordered w-full max-w-xs input-sm"
+              name="platform"
+              placeholder={`Platform :  ${coin.platform || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="cmc_id"
+              placeholder={`CMC_ID :  ${coin.cmc_id || "No ID"}`}
+              className="input input-bordered w-full"
             />
           </div>
 
@@ -142,150 +148,160 @@ document.getElementById("form").reset();
             ></textarea>
           </div>
 
-          <div className="my-3">
-            Telegram Contact :{" "}
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="explorer"
+              placeholder={`Explorer :  ${coin.urls.explorer || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="facebook"
+              placeholder={`Date Launched :  ${coin.urls.facebook || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+          </div>
+
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="source_code"
+              placeholder={`Source Code :  ${coin.urls.source_code || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="technical_doc"
+              placeholder={`Technical Doc :  ${
+                coin.urls.technical_doc || "Empty"
+              }`}
+              className="input input-bordered w-full"
+            />
+          </div>
+
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="reddit"
+              placeholder={`Reddit :  ${coin.urls.reddit || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="twitter"
+              placeholder={`Twitter :  ${coin.urls.twitter || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+          </div>
+
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="website"
+              placeholder={`Website :  ${coin.urls.website || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="instagram"
+              placeholder={`Instagram :  ${coin.urls.instagram || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+          </div>
+
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="youtube"
+              placeholder={`Youtube :  ${coin.urls.youtube || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="telegram"
+              placeholder={`Telegram :  ${coin.urls.telegram || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+          </div>
+
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
               name="telegramContact"
-              placeholder={coin.telegramContact}
-              className="input input-bordered w-full max-w-xs input-sm"
+              placeholder={`Telegram Contact :  ${
+                coin.urls.telegramContact || "Empty"
+              }`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="audit"
+              placeholder={`Audit :  ${coin.urls.audit || "Empty"}`}
+              className="input input-bordered w-full"
             />
           </div>
 
-          <div className="my-3">
-            Telegram URL :{" "}
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
-              name="telegramURL"
-              placeholder={coin.telegramURL}
-              className="input input-bordered w-full max-w-xs input-sm"
+              name="doxx"
+              placeholder={`Doxx :  ${coin.urls.doxx || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="Safu"
+              placeholder={`SAFU :  ${coin.urls.safu || "Empty"}`}
+              className="input input-bordered w-full"
             />
           </div>
 
-          <div className="my-3">
-            Website URL :{" "}
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
-              name="websiteURL"
-              placeholder={coin.websiteURL}
-              className="input input-bordered w-full max-w-xs input-sm"
+              name="kyc"
+              placeholder={`KYC :  ${coin.urls.kyc || "Empty"}`}
+              className="input input-bordered w-full"
             />
           </div>
 
-          <div className="my-3">
-            Instagram URL :{" "}
-            <input
-              type="text"
-              name="instagramURL"
-              placeholder={coin.instagramURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <select
+              name="bmc_audit"
+              className="select select-bordered select-sm ml-2"
+            >
+              <option disabled>
+                {coin.bmc_audit ? "Audit : True" : "Audit : False"}
+              </option>
+              <option value={true}>True</option>
+              <option value={false}>False</option>
+            </select>
 
-          <div className="my-3">
-            Youtube URL :{" "}
             <input
               type="text"
-              name="youtubeURL"
-              placeholder={coin.youtubeURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
-
-          <div className="my-3">
-            Twitter URL :{" "}
-            <input
-              type="text"
-              name="twitterURL"
-              placeholder={coin.twitterURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
-
-          <div className="my-3">
-            Facebook URL :{" "}
-            <input
-              type="text"
-              name="facebookURL"
-              placeholder={coin.facebookURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
-
-          <div className="my-3">
-            Discord URL :{" "}
-            <input
-              type="text"
-              name="discordURL"
-              placeholder={coin.discordURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
-
-          <div className="my-3">
-            Reddit URL :{" "}
-            <input
-              type="text"
-              name="redditURL"
-              placeholder={coin.redditURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
-
-          <div className="my-3">
-            Audit URL :{" "}
-            <input
-              type="text"
-              name="auditURL"
-              placeholder={coin.auditURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
-
-          <div className="my-3">
-            Doxx URL :{" "}
-            <input
-              type="text"
-              name="doxxURL"
-              placeholder={coin.doxxURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
-
-          <div className="my-3">
-            KYC URL :{" "}
-            <input
-              type="text"
-              name="kycURL"
-              placeholder={coin.kycURL}
-              className="input input-bordered w-full max-w-xs input-sm"
-            />
-          </div>
-
-          <div className="my-3">
-            SAFU URL :{" "}
-            <input
-              type="text"
-              name="safuURL"
-              placeholder={coin.safuURL}
-              className="input input-bordered w-full max-w-xs input-sm"
+              name="bmc_audit_score"
+              placeholder={`BMC Audit Score :  ${
+                coin.bmc_audit_score || "Empty"
+              }`}
+              className="input input-bordered w-full"
             />
           </div>
 
           <div>
             <button type="submit" className="btn btn-wide btn-primary">
+              {loading && <span className="loading loading-spinner"></span>}
               Update Coin
             </button>
           </div>
         </form>
-
-        <p className="pt-4">Press ESC key or click the button below to close</p>
-        <div className="modal-action">
-          <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn">Close</button>
-          </form>
-        </div>
       </div>
     </>
   );

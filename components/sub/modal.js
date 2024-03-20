@@ -9,7 +9,11 @@ import {
   Twitter,
   YouTube,
 } from "@mui/icons-material";
-import { approveCoinById, deleteCoinbyId } from "@/lib/editData";
+import {
+  approveCoin,
+  deleteCoinbyId,
+  deleteSubmittedCoin,
+} from "@/lib/editData";
 
 const Modal = ({ coin }) => {
   const [loading, setLoading] = useState(false);
@@ -18,9 +22,7 @@ const Modal = ({ coin }) => {
   const onApprove = async () => {
     setLoading2(true);
 
-    const id = coin.id;
-
-    const response = await approveCoinById(id);
+    const response = await approveCoin(coin);
 
     setLoading2(false);
 
@@ -35,9 +37,7 @@ const Modal = ({ coin }) => {
   const onDelete = async () => {
     setLoading(true);
 
-    const id = coin.id;
-
-    const response = await deleteCoinbyId(id);
+    const response = await deleteSubmittedCoin(coin);
 
     setLoading(false);
 
@@ -49,11 +49,30 @@ const Modal = ({ coin }) => {
     alert("Coin request successfully deleted - Close Modal and Refresh Page");
   };
 
+  const convertTimestamp = (timestamp) => {
+    // Create a new Date object with the timestamp
+    const date = new Date(timestamp);
+
+    // Use the Date methods to get the desired date components
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Month is zero-based, so we add 1
+    const day = date.getDate();
+
+    // You can also get hours, minutes, seconds, etc. if needed
+
+    // Create a string representation of the date
+    const dateString = `${year}-${month < 10 ? "0" : ""}${month}-${
+      day < 10 ? "0" : ""
+    }${day}`;
+
+    return dateString; // Output: "2021-03-17"
+  };
+
   return (
     <>
       <div className="modal-box max-w-[800px]">
         <div className="flex flex-row">
-          <img src={coin.logoURL} className="rounded-xl w-24 h-24" />
+          <img src={coin.logo} className="rounded-xl w-24 h-24" />
 
           <span className="my-auto text-2xl ml-5">
             {coin.coinName}
@@ -67,14 +86,28 @@ const Modal = ({ coin }) => {
           </span>
         </div>
 
+        {coin.presale && (
+          <>
+            <div className="my-3">
+              <span className="badge badge-ghost badge-lg">Date to Launch</span>{" "}
+              : {convertTimestamp(coin.date_launched)}
+            </div>
+
+            <div className="my-3">
+              <span className="badge badge-ghost badge-lg">End Date</span> :{" "}
+              {convertTimestamp(coin.date_end)}
+            </div>
+          </>
+        )}
+
         <div className="my-3">
           <span className="badge badge-ghost badge-lg">Contract Address</span> :{" "}
-          {coin.contractAddress}
+          {coin.contract_address}
         </div>
 
         <div className="my-3">
           <span className="badge badge-ghost badge-lg">Coin Chain</span> :{" "}
-          {coin.chain}
+          {coin.platform}
         </div>
 
         <div className="my-3">
@@ -83,82 +116,86 @@ const Modal = ({ coin }) => {
         </div>
 
         <div className="my-3">
-          <a
-            className="badge badge-accent badge-lg"
-            href={`https://t.me/${coin.telegramContact}`}
-          >
-            Contact via Telegram
-            <TelegramIcon className="ml-2" />
-          </a>{" "}
-          : {coin.telegramContact}
-        </div>
-
-        <div className="my-3">
-          {coin.websiteURL && (
+          {coin.urls.telegramContact && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`${coin.websiteURL}`}
+                href={`https://t.me/${coin.urls.telegramContact}`}
+              >
+                Contact via Telegram
+                <TelegramIcon className="ml-2" />
+              </a>{" "}
+              : {coin.urls.telegramContact}
+            </>
+          )}
+        </div>
+
+        <div className="my-3">
+          {coin.urls.website && (
+            <>
+              <a
+                className="badge badge-accent badge-lg"
+                href={`${coin.urls.website}`}
               >
                 Website URL
                 <LanguageIcon className="ml-2" />
               </a>{" "}
-              : {coin.websiteURL}
+              : {coin.urls.website}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.instagramURL && (
+          {coin.urls.instagram && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`https://instagram.com/${coin.instagramURL}`}
+                href={`https://instagram.com/${coin.urls.instagram}`}
               >
                 Instagram URL
                 <Instagram className="ml-2" />
               </a>{" "}
-              : {coin.instagramURL}
+              : {coin.urls.instagram}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.youtubeURL && (
+          {coin.urls.youtube && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`https://youtube.com/${coin.youtubeURL}`}
+                href={`https://youtube.com/${coin.urls.youtube}`}
               >
                 Youtube URL
                 <YouTube className="ml-2" />
               </a>{" "}
-              : {coin.youtubeURL}
+              : {coin.urls.youtube}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.twitterURL && (
+          {coin.urls.twitter && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`https://twitter.com/${coin.twitterURL}`}
+                href={`https://twitter.com/${coin.urls.twitter}`}
               >
                 Twitter URL
                 <Twitter className="ml-2" />
               </a>{" "}
-              : {coin.twitterURL}
+              : {coin.urls.twitter}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.facebookURL && (
+          {coin.urls.facebook && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`https://facebook.com/${coin.facebookURL}`}
+                href={`https://facebook.com/${coin.urls.facebook}`}
               >
                 Facebook URL
                 <Facebook className="ml-2" />
@@ -169,79 +206,64 @@ const Modal = ({ coin }) => {
         </div>
 
         <div className="my-3">
-          {coin.discordURL && (
+          {coin.urls.reddit && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`https://discord.gg/${coin.discordURL}`}
-              >
-                Discord URL
-                <LanguageIcon className="ml-2" />
-              </a>{" "}
-              : {coin.discordURL}
-            </>
-          )}
-        </div>
-
-        <div className="my-3">
-          {coin.redditURL && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={`https://reddit.com/r/${coin.redditURL}`}
+                href={`https://reddit.com/r/${coin.urls.reddit}`}
               >
                 Reddit URL
                 <Reddit className="ml-2" />
               </a>{" "}
-              : {coin.redditURL}
+              : {coin.urls.reddit}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.auditURL && (
+          {coin.urls.audit && (
             <>
-              <a className="badge badge-accent badge-lg" href={coin.auditURL}>
+              <a className="badge badge-accent badge-lg" href={coin.urls.audit}>
                 Audit URL
                 <LanguageIcon className="ml-2" />
               </a>{" "}
-              : {coin.auditURL}
+              : {coin.urls.audit}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.doxxURL && (
+          {coin.urls.doxx && (
             <>
-              <a className="badge badge-accent badge-lg" href={coin.doxxURL}>
+              <a className="badge badge-accent badge-lg" href={coin.urls.doxx}>
                 Doxx URL
                 <LanguageIcon className="ml-2" />
               </a>{" "}
-              : {coin.doxxURL}
+              : {coin.urls.doxx}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.kycURL && (
+          {coin.urls.kyc && (
             <>
-              <a className="badge badge-accent badge-lg" href={coin.kycURL}>
+              <a className="badge badge-accent badge-lg" href={coin.urls.kyc}>
                 KYC URL
                 <LanguageIcon className="ml-2" />
               </a>{" "}
-              : {coin.kycURL}
+              : {coin.urls.kyc}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.safuURL && (
+          {coin.urls.safu && (
             <>
-              <a className="badge badge-accent badge-lg" href={coin.safuURL}>
+              <a className="badge badge-accent badge-lg" href={coin.urls.safu}>
                 SAFU URL
                 <LanguageIcon className="ml-2" />
               </a>{" "}
-              : {coin.safuURL}
+              : {coin.urls.safu}
             </>
           )}
         </div>
