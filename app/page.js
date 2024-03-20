@@ -4,6 +4,8 @@ import { editDatabase } from "@/lib/editData";
 import { Coins, fetchAllCoins } from "@/lib/fetchData";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const coinData = await Coins();
   // const response = await editDatabase();

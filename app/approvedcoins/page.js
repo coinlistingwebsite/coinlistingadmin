@@ -2,6 +2,8 @@ import ApprovedCoin from "@/components/main/approved-coin";
 import { Coins } from "@/lib/fetchData";
 import React from "react";
 
+export const dynamic = "force-dynamic";
+
 const ApprovedCoinsPage = async () => {
   const coinData = await Coins();
 

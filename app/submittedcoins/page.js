@@ -1,6 +1,7 @@
 import SubmittedCoin from "@/components/main/submitted-coin";
 import { SubmittedCoins } from "@/lib/fetchData";
 
+export const dynamic = "force-dynamic";
 const SubmittedCoinPage = async () => {
   const coinData = await SubmittedCoins();
 
