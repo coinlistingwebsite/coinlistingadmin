@@ -18,6 +18,7 @@ const ModalApprovedCoins = ({ coin }) => {
       return;
     }
     alert("Coin successfully deleted - Close Modal and Refresh Page");
+    window.location.reload(true);
   };
 
   return (

@@ -32,6 +32,7 @@ const Modal = ({ coin }) => {
     }
 
     alert("Coin request Approved - Close Modal and Refresh Page");
+    window.location.reload(true);
   };
 
   const onDelete = async () => {
@@ -47,6 +48,7 @@ const Modal = ({ coin }) => {
     }
 
     alert("Coin request successfully deleted - Close Modal and Refresh Page");
+    window.location.reload(true);
   };
 
   const convertTimestamp = (timestamp) => {

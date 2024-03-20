@@ -72,7 +72,7 @@ const ModalEdit = ({ coin }) => {
 
     alert("Coin Updated successfully - close modal and refresh page");
 
-    //  window.location.reload(true);
+      window.location.reload(true);
   }
 
   return (
