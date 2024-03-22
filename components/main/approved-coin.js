@@ -3,9 +3,6 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import { useEffect, useState } from "react";
 import ModalApprovedCoins from "../sub/modal-approved-coins";
 
-import VerifiedIcon from "@mui/icons-material/Verified";
-import { promotedCoinNow, unPromoteCoinNow } from "@/lib/editData";
-
 const ApprovedCoin = ({ coinsData }) => {
   const [coins, setCoins] = useState(coinsData);
   const [search, setSearch] = useState("");
@@ -29,28 +26,6 @@ const ApprovedCoin = ({ coinsData }) => {
 
     return () => clearTimeout(timer);
   }, [search]);
-
-  const promotedCoin = async (coin) => {
-    const response = await promotedCoinNow(coin);
-
-    if (!response) {
-      alert("Error in promoting coin - Please try again");
-      return;
-    }
-
-    alert("Coin Promoted - close modal and refresh page");
-  };
-
-  const unpromoteCoin = async (coin) => {
-    const response = await unPromoteCoinNow(coin);
-
-    if (!response) {
-      alert("Error in unpromoting coin - Please try again");
-      return;
-    }
-
-    alert("Coin UnPromoted - close modal and refresh page");
-  };
 
   if (coins.length == 0) {
     <div>loading..</div>;
@@ -160,20 +135,13 @@ const ApprovedCoin = ({ coinsData }) => {
 
                 <td>
                   {coin.approved ? (
-                    <button
-                      onClick={() => unpromoteCoin(coin)}
-                      className="btn btn-wide btn-secondary"
-                    >
-                      Remove Promotion
-                    </button>
+                    <>
+                      <span className="badge badge-primary">Promoted</span>
+                    </>
                   ) : (
-                    <button
-                      onClick={() => promotedCoin(coin)}
-                      className="btn btn-wide btn-accent"
-                    >
-                      <VerifiedIcon className="ml-2" />
-                      Promote Coin
-                    </button>
+                    <>
+                      <span className="badge badge-ghost">Unpromoted</span>
+                    </>
                   )}
                 </td>
                 <th>
