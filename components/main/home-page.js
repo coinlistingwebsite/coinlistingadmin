@@ -1,5 +1,7 @@
 "use client";
 
+import axios from "axios";
+
 const HomePage = ({ coins }) => {
   const approved = coins.filter((coin) => {
     return coin.verified == true;
@@ -23,6 +25,7 @@ const HomePage = ({ coins }) => {
           Refresh Page
         </button>
       </div>
+
 
       <div className="stats shadow">
         <div className="stat">

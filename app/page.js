@@ -18,8 +18,12 @@ export default async function Home() {
       </main>
     );
 
+
   return (
     <main>
+
+
+
       <HomePage coins={coinData} />
     </main>
   );
