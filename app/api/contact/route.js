@@ -8,7 +8,7 @@ export async function POST(request) {
 
   let message = `
   <b>
-  🟢 ${name} found on BullishMarketCap.
+  🟢 ${name} listed on BullishMarketCap.
   </b>
   ⛓️Chain: ${platform}
 
