@@ -22,16 +22,16 @@ const Modal = ({ coin }) => {
   const onApprove = async () => {
     setLoading2(true);
 
-    const response = await approveCoin(coin);
+    const { error, message } = await approveCoin(coin);
 
     setLoading2(false);
 
-    if (!response) {
-      alert("Error deleting coin from database");
+    if (error) {
+      alert(message);
       return;
     }
 
-    alert("Coin request Approved - Close Modal and Refresh Page");
+    alert(message);
     window.location.reload(true);
   };
 
@@ -148,31 +148,23 @@ const Modal = ({ coin }) => {
         </div>
 
         <div className="my-3">
-          {coin.urls.instagram && (
+          {coin.urls.lauchpad && (
             <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={`https://instagram.com/${coin.urls.instagram}`}
-              >
-                Instagram URL
-                <Instagram className="ml-2" />
-              </a>{" "}
-              : {coin.urls.instagram}
+              <a className="badge badge-accent badge-lg">LaunchPad</a>{" "}
             </>
           )}
         </div>
 
         <div className="my-3">
-          {coin.urls.youtube && (
+          {coin.urls.launchpadURL && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`https://youtube.com/${coin.urls.youtube}`}
+                href={coin.urls.launchpadURL}
               >
-                Youtube URL
-                <YouTube className="ml-2" />
+                Lauchpad URL
               </a>{" "}
-              : {coin.urls.youtube}
+              : {coin.urls.launchpadURL}
             </>
           )}
         </div>
