@@ -47,7 +47,7 @@ export async function POST(request) {
           [
             {
               text: "🌸 Join BullishMarketCap 🌸",
-              url: `${telegram}`,
+              url: `https://t.me/BullishMarktCap`,
             },
           ],
 
