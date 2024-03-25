@@ -2,6 +2,7 @@
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { useEffect, useState } from "react";
 import ModalApprovedCoins from "../sub/modal-approved-coins";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 const ApprovedCoin = ({ coinsData }) => {
   const [coins, setCoins] = useState(coinsData);
