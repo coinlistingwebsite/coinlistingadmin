@@ -22,7 +22,23 @@ const Modal = ({ coin }) => {
   const onApprove = async () => {
     setLoading2(true);
 
-    const { error, message } = await approveCoin(coin);
+    const { error, message, id } = await approveCoin(coin);
+
+    const resp = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: coin.coinName,
+        logo: coin.logo,
+        platform: coin.platform,
+        id: id,
+        launchpad: coin.launchpad || "BullishMarketCap",
+        launchpadURL: coin.launchpadUrl || "https://bullishmarketcap.com",
+        telegram: coin.urls.telegram || "https://t.me/BullishMarktCap",
+      }),
+    });
 
     setLoading2(false);
 
@@ -32,7 +48,13 @@ const Modal = ({ coin }) => {
     }
 
     alert(message);
-    window.location.reload(true);
+
+    if (!resp) {
+      alert("Error in sending alert");
+      return;
+    }
+
+    alert("Alert Succesfully sent");
   };
 
   const onDelete = async () => {
