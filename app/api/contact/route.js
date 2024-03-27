@@ -3,8 +3,19 @@ import { NextResponse } from "next/server";
 import { Telegraf } from "telegraf";
 
 export async function POST(request) {
-  const { name, logo, platform, id, launchpad, launchpadURL, telegram } =
-    await request.json();
+  const {
+    name,
+    logo,
+    platform,
+    id,
+    launchpad,
+    launchpadURL,
+    telegram,
+    kyc,
+    audit,
+    doxx,
+    safu,
+  } = await request.json();
 
   let message = `
   <b>
@@ -12,7 +23,11 @@ export async function POST(request) {
   </b>
   ⛓️Chain: ${platform}
 
-  🚧  Sales Phase planned. For more information join their community.
+  🚧 Project Sale-Phase has Planned.
+
+  ${kyc ? <>🟢KYC</> : null}   ${audit ? <>🔵Audit</> : null}   ${
+    doxx ? <>🟣SAFU</> : null
+  }     ${safu ? <>🟡DOXX</> : null} 
 
   🚀BMC Support Contact:@BMC_Support_now
       `;
