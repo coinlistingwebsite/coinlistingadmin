@@ -17,6 +17,9 @@ export async function POST(request) {
     safu,
   } = await request.json();
 
+
+  
+
   let message = `
   <b>
   🟢 ${name} listed on BullishMarketCap.
@@ -24,10 +27,6 @@ export async function POST(request) {
   ⛓️Chain: ${platform}
 
   🚧 Project Sale-Phase has Planned.
-
-  ${kyc ? <>🟢KYC</> : null}   ${audit ? <>🔵Audit</> : null}   ${
-    doxx ? <>🟣SAFU</> : null
-  }     ${safu ? <>🟡DOXX</> : null} 
 
   🚀BMC Support Contact:@BMC_Support_now
       `;
