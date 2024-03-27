@@ -54,7 +54,7 @@ export async function POST(request) {
           [
             {
               text: "🚀Vote on BMC🚀",
-              url: `https://bullishmarketcap.vercel.app/coins/${id}`,
+              url: `https://bullishmarketcap.com/coins/${id}`,
             },
           ],
         ],
