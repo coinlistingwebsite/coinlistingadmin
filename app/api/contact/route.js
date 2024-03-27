@@ -11,13 +11,7 @@ export async function POST(request) {
     launchpad,
     launchpadURL,
     telegram,
-    kyc,
-    audit,
-    doxx,
-    safu,
   } = await request.json();
-
-
   
 
   let message = `
