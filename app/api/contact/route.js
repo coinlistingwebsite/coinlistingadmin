@@ -13,9 +13,8 @@ export async function POST(request) {
   ⛓️Chain: ${platform}
 
   🚧 Project Sale-Phase has Planned.
-
   <a href="https://www.bullishmarketcap.com/coins/${id}">
-  🔥Vote now
+ 🔥 VOTE NOW ON BULLISHMARKETCAP
   </a>
   `;
 
