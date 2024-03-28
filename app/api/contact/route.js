@@ -3,16 +3,8 @@ import { NextResponse } from "next/server";
 import { Telegraf } from "telegraf";
 
 export async function POST(request) {
-  const {
-    name,
-    logo,
-    platform,
-    id,
-    launchpad,
-    launchpadURL,
-    telegram,
-  } = await request.json();
-  
+  const { name, logo, platform, id, launchpad, launchpadURL, telegram } =
+    await request.json();
 
   let message = `
   <b>
@@ -23,7 +15,11 @@ export async function POST(request) {
   🚧 Project Sale-Phase has Planned.
 
   🚀BMC Support Contact:@BMC_Support_now
-      `;
+
+  <a href="https://www.bullishmarketcap.com/coins/${id}">
+  🔥Vote now
+  </a>
+  `;
 
   try {
     // Replace 'YOUR_BOT_TOKEN' with your actual bot token
@@ -56,13 +52,6 @@ export async function POST(request) {
             {
               text: "🌸 Join BullishMarketCap 🌸",
               url: `https://t.me/BullishMarktCap`,
-            },
-          ],
-
-          [
-            {
-              text: "🚀Vote on BMC🚀",
-              url: `https://bullishmarketcap.com/coins/${id}`,
             },
           ],
         ],
