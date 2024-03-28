@@ -14,8 +14,6 @@ export async function POST(request) {
 
   🚧 Project Sale-Phase has Planned.
 
-  🚀BMC Support Contact:@BMC_Support_now
-
   <a href="https://www.bullishmarketcap.com/coins/${id}">
   🔥Vote now
   </a>
