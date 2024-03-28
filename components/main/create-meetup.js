@@ -12,6 +12,7 @@ const CreateMeetup = () => {
   const [description, setDescription] = useState("");
   const [logo, setLogo] = useState();
   const [loading, setLoading] = useState(false);
+  const [link, setLink] = useState("");
 
   // image validation
   const scanImg = (file) => {
@@ -39,7 +40,8 @@ const CreateMeetup = () => {
       location,
       description,
       logo,
-      startDate
+      startDate,
+      link
     );
 
     setLoading(false);
@@ -120,6 +122,21 @@ const CreateMeetup = () => {
           onChange={(event) => scanImg(event.target.files[0])}
         />
       </label>
+
+      <div className="flex-1">
+        <div className="flex flex-row mt-5">
+          <span className="flex-1">Link</span>
+        </div>
+        <div>
+          <input
+            type="text"
+            className="input input-bordered input-md w-full"
+            data-theme="light"
+            onChange={(e) => setLink(e.target.value)}
+            placeholder="Website"
+          />
+        </div>
+      </div>
 
       <button className="btn btn-accent mt-5" onClick={handleSubmit}>
         {loading && <span className="loading loading-spinner"></span>}
