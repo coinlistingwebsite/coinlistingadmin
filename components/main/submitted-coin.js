@@ -79,16 +79,15 @@ const SubmittedCoin = ({ coins }) => {
                         </span>
                       </>
                     ) : (
-                      <span className="badge badge-ghost badge-sm">Token</span>
+                      <span className="badge badge-accent badge-sm">Token</span>
                     )}
                   </span>
                 </td>
                 <td>
-                  {coin.email || "No Email"}
-                  <br />
                   <a
                     className="badge badge-secondary badge-sm"
-                    href={`https://t.me/${coin.urls.telegramContact}`}
+                    href={coin.urls.telegramContact}
+                    target="_blank"
                   >
                     Contact via <TelegramIcon />
                   </a>

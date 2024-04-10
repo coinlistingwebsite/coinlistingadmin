@@ -24,7 +24,15 @@ const Modal = ({ coin }) => {
 
     const { error, message, id } = await approveCoin(coin);
 
-    const resp = await fetch("/api/contact", {
+    let URL;
+
+    if (coin.presale) {
+      URL = "/api/contact";
+    } else {
+      URL = "/api/token";
+    }
+
+    const resp = await fetch(URL, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -33,7 +41,12 @@ const Modal = ({ coin }) => {
         name: coin.coinName,
         logo: coin.logo,
         platform: coin.platform,
-        id: id,
+        symbol: coin.symbol,
+        //      id: id,
+        id: 2,
+        chart: coin.urls.chart,
+        website: coin.urls.website,
+        contract: coin.contract_address,
         launchpad: coin.urls.launchpad || "BullishMarketCap",
         launchpadURL: coin.urls.launchpadURL || "https://bullishmarketcap.com",
         telegram: coin.urls.telegram || "https://t.me/BullishMarktCap",
@@ -106,7 +119,12 @@ const Modal = ({ coin }) => {
                 <br />
                 <div className="badge badge-sm badge-secondary">Presale</div>
               </>
-            ) : null}
+            ) : (
+              <>
+                <br />
+                <div className="badge badge-sm badge-secondary">Token</div>
+              </>
+            )}
           </span>
         </div>
 
@@ -130,7 +148,7 @@ const Modal = ({ coin }) => {
         </div>
 
         <div className="my-3">
-          <span className="badge badge-ghost badge-lg">Coin Chain</span> :{" "}
+          <span className="badge badge-ghost badge-lg">Coin Chain</span> :{"  "}
           {coin.platform}
         </div>
 
@@ -144,7 +162,8 @@ const Modal = ({ coin }) => {
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`https://t.me/${coin.urls.telegramContact}`}
+                href={coin.urls.telegramContact}
+                target="_blank"
               >
                 Contact via Telegram
                 <TelegramIcon className="ml-2" />
@@ -159,7 +178,8 @@ const Modal = ({ coin }) => {
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={`${coin.urls.website}`}
+                href={coin.urls.website}
+                target="_blank"
               >
                 Website URL
                 <LanguageIcon className="ml-2" />
@@ -170,9 +190,25 @@ const Modal = ({ coin }) => {
         </div>
 
         <div className="my-3">
+          {coin.urls.chart && (
+            <>
+              <a
+                className="badge badge-accent badge-lg"
+                href={coin.urls.chart}
+                target="_blank"
+              >
+                Chart URL
+                <LanguageIcon className="ml-2" />
+              </a>{" "}
+              : {coin.urls.chart}
+            </>
+          )}
+        </div>
+
+        <div className="my-3">
           {coin.urls.lauchpad && (
             <>
-              <a className="badge badge-accent badge-lg">LaunchPad</a>{" "}
+              <a className="badge badge-accent badge-lg">LaunchPad / BUY</a>{" "}
             </>
           )}
         </div>
@@ -183,8 +219,9 @@ const Modal = ({ coin }) => {
               <a
                 className="badge badge-accent badge-lg"
                 href={coin.urls.launchpadURL}
+                target="_blank"
               >
-                Lauchpad URL
+                BUY / LAUNCHPAD URL
               </a>{" "}
               : {coin.urls.launchpadURL}
             </>
