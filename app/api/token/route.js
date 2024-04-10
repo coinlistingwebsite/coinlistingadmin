@@ -68,26 +68,26 @@ export async function POST(request) {
             [
               {
                 text: `⚡️ ${name} CHAT ⚡️`,
-                url: `${telegram}`,
+                url: `${telegram.trim()}`,
               },
             ],
 
             [
               {
                 text: `💰Buy`,
-                url: `${launchpadURL}`,
+                url: `${launchpadURL.trim()}`,
               },
             ],
             [
               {
                 text: `🚦Chart`,
-                url: `${chart}`,
+                url: `${chart.trim()}`,
               },
             ],
             [
               {
                 text: `📍Website`,
-                url: `${website}`,
+                url: `${website.trim()}`,
               },
             ],
             [

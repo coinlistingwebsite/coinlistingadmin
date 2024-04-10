@@ -43,7 +43,7 @@ const Modal = ({ coin }) => {
         platform: coin.platform,
         symbol: coin.symbol,
         //      id: id,
-        id: 2,
+        id: id,
         chart: coin.urls.chart,
         website: coin.urls.website,
         contract: coin.contract_address,
