@@ -88,7 +88,7 @@ const AdvertBannerTwo = ({ banner }) => {
         )}
 
         <p className="my-2">
-          Advert Banner 2 : This Image should be 1800px X 120px and not exceed
+          Advert Banner 2 : This Image should be 1500px X 120px and not exceed
           1MB
           <br />
           Banner Locations : Slider 2 Image
