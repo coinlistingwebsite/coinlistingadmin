@@ -10,7 +10,6 @@ const ModalEdit = ({ coin }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    const presale = formData.get("presale");
     const votes = formData.get("votes");
     const address = formData.get("address");
     const platform = formData.get("platform");
@@ -31,13 +30,10 @@ const ModalEdit = ({ coin }) => {
     const doxx = formData.get("doxx");
     const safu = formData.get("safu");
     const kyc = formData.get("kyc");
-    const bmc_audit = formData.get("bmc_audit");
-    const bmc_audit_score = formData.get("bmc_audit_score");
 
     setLoading(true);
 
     const response = await editCoin(
-      !presale ? coin.presale : presale,
       !address ? coin.contract_address : address,
       !votes ? coin.votes : votes,
       !platform ? coin.platform : platform,
@@ -58,8 +54,7 @@ const ModalEdit = ({ coin }) => {
       !doxx ? coin.urls.doxx : doxx,
       !safu ? coin.urls.safu : safu,
       !kyc ? coin.urls.kyc : kyc,
-      !bmc_audit ? coin.bmc_audit : bmc_audit,
-      !bmc_audit_score ? coin.bmc_audit_score : bmc_audit_score,
+
       coin
     );
 
@@ -72,7 +67,7 @@ const ModalEdit = ({ coin }) => {
 
     alert("Coin Updated successfully - close modal and refresh page");
 
-      window.location.reload(true);
+    window.location.reload(true);
   }
 
   return (
@@ -89,23 +84,16 @@ const ModalEdit = ({ coin }) => {
                 <br />
                 <div className="badge badge-sm badge-secondary">Presale</div>
               </>
-            ) : null}
+            ) : (
+              <>
+                <br />
+                <div className="badge badge-sm badge-secondary">Token</div>
+              </>
+            )}
           </span>
         </div>
 
         <form onSubmit={handleSubmit} id="form">
-          {/* <div className="my-3">
-            <span className="my-auto">Presale</span>
-            <select
-              name="presale"
-              className="select select-bordered select-sm ml-2"
-            >
-              <option disabled>{coin.presale ? "True" : "False"}</option>
-              <option value={1}>True</option>
-              <option value={0}>False</option>
-            </select>
-          </div> */}
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -152,7 +140,7 @@ const ModalEdit = ({ coin }) => {
             <input
               type="text"
               name="explorer"
-              placeholder={`Explorer :  ${coin.urls.explorer || "Empty"}`}
+              placeholder={`Explorer :  ${coin.urls?.explorer || "Empty"}`}
               className="input input-bordered w-full"
             />
 
@@ -269,28 +257,6 @@ const ModalEdit = ({ coin }) => {
               type="text"
               name="kyc"
               placeholder={`KYC :  ${coin.urls.kyc || "Empty"}`}
-              className="input input-bordered w-full"
-            />
-          </div>
-
-          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
-            <select
-              name="bmc_audit"
-              className="select select-bordered select-sm ml-2"
-            >
-              <option disabled>
-                {coin.bmc_audit ? "Audit : True" : "Audit : False"}
-              </option>
-              <option value={true}>True</option>
-              <option value={false}>False</option>
-            </select>
-
-            <input
-              type="text"
-              name="bmc_audit_score"
-              placeholder={`BMC Audit Score :  ${
-                coin.bmc_audit_score || "Empty"
-              }`}
               className="input input-bordered w-full"
             />
           </div>
