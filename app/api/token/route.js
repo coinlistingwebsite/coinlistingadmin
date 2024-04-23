@@ -32,7 +32,7 @@ export async function POST(request) {
 
   if (quote.status.credit_count == 1) {
     coinData = `
-💵 Price : ${formatNumber(quote?.data.quotes[0].quote.USD.price)}
+💵 Price : ${formatNumber(quote?.data.quotes[0].quote.USD.price)} USD
 💸 MarketCap : ${formatNumber(quote?.data.quotes[0].quote.USD.market_cap)}
 🪄 Total Supply : ${formatNumber(quote?.data.quotes[0].quote.USD.total_supply)}
 🔖 Volume 24H : ${formatNumber(quote?.data.quotes[0].quote.USD.volume_24h)}

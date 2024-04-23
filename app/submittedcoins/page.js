@@ -5,6 +5,8 @@ export const dynamic = "force-dynamic";
 const SubmittedCoinPage = async () => {
   const coinData = await SubmittedCoins();
 
+
+
   if (!coinData)
     return (
       <main className="max-w-7xl mx-auto py-40 text-center">

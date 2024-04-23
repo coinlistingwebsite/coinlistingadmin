@@ -21,9 +21,6 @@ export default async function Home() {
 
   return (
     <main>
-
-
-
       <HomePage coins={coinData} />
     </main>
   );

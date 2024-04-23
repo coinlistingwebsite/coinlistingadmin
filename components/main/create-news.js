@@ -1,12 +1,8 @@
 "use client";
-import { submitMeetup } from "@/lib/editData";
+import { submitNews } from "@/lib/editData";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
 
-import "react-datepicker/dist/react-datepicker.css";
-
-const CreateMeetup = () => {
-  const [startDate, setStartDate] = useState(new Date());
+const CreateNews = () => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
@@ -30,24 +26,17 @@ const CreateMeetup = () => {
   };
 
   const handleSubmit = async () => {
-    if (!title || !location || !description || !logo || !startDate) {
+    if (!title || !location || !description || !logo) {
       alert("Please complete all fields");
       return;
     }
 
     setLoading(true);
-    const response = await submitMeetup(
-      title,
-      location,
-      description,
-      logo,
-      startDate,
-      link
-    );
+    const response = await submitNews(title, location, description, logo, link);
 
     setLoading(false);
 
-    if (!response) alert("Error in submitting meetup");
+    if (!response) alert("Error in submitting News");
 
     alert("Successfully submitted");
     window.location.reload();
@@ -55,7 +44,7 @@ const CreateMeetup = () => {
 
   return (
     <div>
-      <h1>Create MeetUp</h1>
+      <h1>Create News</h1>
 
       {/* Section */}
       <div className="block lg:flex lg:flex-row mt-5 gap-x-5">
@@ -70,14 +59,14 @@ const CreateMeetup = () => {
               className="input input-bordered input-md w-full"
               data-theme="light"
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title of Meetup"
+              placeholder="News Title"
             />
           </div>
         </div>
         {/* Section 2 */}
         <div className="flex-1">
           <div className="flex flex-row mt-5">
-            <span className="flex-1">Location</span>
+            <span className="flex-1">Source</span>
           </div>
           <div>
             <input
@@ -85,7 +74,7 @@ const CreateMeetup = () => {
               className="input input-bordered input-md w-full"
               data-theme="light"
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Location of Meetup"
+              placeholder="Source of news e.g Blockchain Reporter, Forbes Digital Assets"
             />
           </div>
         </div>
@@ -93,21 +82,9 @@ const CreateMeetup = () => {
 
       {/* End  of Row */}
 
-      <div className="mt-5">
-        <div className="flex flex-row mt-5">
-          <span className="flex-1">Meetup Date</span>
-        </div>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          showTimeSelect
-          className="p-3 rounded-lg"
-        />
-      </div>
-
       <textarea
         className="textarea textarea-bordered h-24 w-full mt-5"
-        placeholder="Meet Up description"
+        placeholder="News description"
         data-theme="light"
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
@@ -134,7 +111,7 @@ const CreateMeetup = () => {
             className="input input-bordered input-md w-full"
             data-theme="light"
             onChange={(e) => setLink(e.target.value)}
-            placeholder="Website"
+            placeholder="News Link"
           />
         </div>
       </div>
@@ -147,4 +124,4 @@ const CreateMeetup = () => {
   );
 };
 
-export default CreateMeetup;
+export default CreateNews;

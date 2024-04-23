@@ -1,17 +1,40 @@
 "use client";
-
-import axios from "axios";
+import { deleteEndedPresales } from "@/lib/editData";
+import { useEffect, useState } from "react";
 
 const HomePage = ({ coins }) => {
+  const [loading, setLoading] = useState(false);
+
   const approved = coins.filter((coin) => {
     return coin.verified == true;
   });
-  const promoted = coins.filter((coin) => {
-    return coin.promoted == true;
+  const presales = coins.filter((coin) => {
+    return coin.presale == true;
   });
-  const submitted = coins.filter((coin) => {
-    return coin.verified == false;
+  const tokens = coins.filter((coin) => {
+    return coin.presale == false;
   });
+
+  var currentDate = new Date();
+  var time = currentDate.getTime();
+
+  const ended_presale = coins.filter((coin) => {
+    return coin.date_end < time;
+  });
+
+  const deleteCompeletedPresale = async () => {
+    setLoading(true);
+
+    const response = await deleteEndedPresales();
+
+    if (!response) {
+      alert("Error Deleting -  Please Re-try");
+      return;
+    }
+    alert("Successfully deleted");
+    setLoading(false);
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -25,7 +48,6 @@ const HomePage = ({ coins }) => {
           Refresh Page
         </button>
       </div>
-
 
       <div className="stats shadow">
         <div className="stat">
@@ -41,8 +63,8 @@ const HomePage = ({ coins }) => {
 
         <div className="stat">
           <div className="stat-figure text-secondary"></div>
-          <div className="stat-title">Promoted Coins</div>
-          <div className="stat-value">{promoted.length}</div>
+          <div className="stat-title">Presales Coins</div>
+          <div className="stat-value">{presales.length}</div>
           <div className="stat-desc">
             {" "}
             <a href="/approvedcoins" className="underline">
@@ -53,8 +75,8 @@ const HomePage = ({ coins }) => {
 
         <div className="stat">
           <div className="stat-figure text-secondary"></div>
-          <div className="stat-title">Newly Submitted</div>
-          <div className="stat-value">{submitted.length}</div>
+          <div className="stat-title">Tokens</div>
+          <div className="stat-value">{tokens.length}</div>
           <div className="stat-desc">
             <a href="/submittedcoins" className="underline">
               navigate
@@ -66,10 +88,15 @@ const HomePage = ({ coins }) => {
       <div className="stats shadow mt-10">
         <div className="stat">
           <div className="stat-figure"></div>
-          <div className="stat-title">Total Coins on Database</div>
-          <div className="stat-value">{coins.length}</div>
+          <div className="stat-title">Ended Presales</div>
+          <div className="stat-value">{ended_presale.length}</div>
         </div>
       </div>
+      <br />
+      <button className="btn btn-error" onClick={deleteCompeletedPresale}>
+        {loading && <span className="loading loading-spinner"></span>}
+        Delete Ended Presale
+      </button>
     </div>
   );
 };
