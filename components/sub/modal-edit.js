@@ -3,8 +3,19 @@ import React, { useState } from "react";
 
 import { editCoin } from "@/lib/editData";
 
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { Stack, Typography } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
+dayjs.extend(utc);
+
 const ModalEdit = ({ coin }) => {
   const [loading, setLoading] = useState(false);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [change, setChange] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -54,7 +65,8 @@ const ModalEdit = ({ coin }) => {
       !doxx ? coin.urls.doxx : doxx,
       !safu ? coin.urls.safu : safu,
       !kyc ? coin.urls.kyc : kyc,
-
+      !startDate ? coin.date_launched : Date.parse(startDate),
+      !endDate ? coin.date_launched : Date.parse(endDate),
       coin
     );
 
@@ -111,7 +123,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -127,7 +138,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="my-3">
             <textarea
               name="description"
@@ -135,7 +145,6 @@ const ModalEdit = ({ coin }) => {
               placeholder={coin.description}
             ></textarea>
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -151,7 +160,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -169,7 +177,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -185,7 +192,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -201,7 +207,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -217,7 +222,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -235,7 +239,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -251,7 +254,6 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -260,8 +262,49 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
+          {/* Start of Row */}
+          <input type="checkbox" onChange={() => setChange(!change)} /> Adjust
+          Start and End Time of Presale
+          {change && (
+            <>
+              <div className="mt-5">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Stack spacing={2}>
+                    <DateTimePicker
+                      className="bg-white"
+                      value={startDate}
+                      onChange={(value) => {
+                        setStartDate(value);
+                      }}
+                    />
+                    <Typography>
+                      Presale Start Date:{" "}
+                      {startDate && startDate.utc().format()}
+                      UTC
+                    </Typography>
+                  </Stack>
+                </LocalizationProvider>
+              </div>
 
-          <div>
+              <div className="mt-5">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Stack spacing={2}>
+                    <DateTimePicker
+                      className="bg-white"
+                      value={endDate}
+                      onChange={(value) => {
+                        setEndDate(value);
+                      }}
+                    />
+                    <Typography>
+                      Presale End Date: {endDate && endDate.utc().format()} UTC
+                    </Typography>
+                  </Stack>
+                </LocalizationProvider>
+              </div>
+            </>
+          )}
+          <div className="mt-10">
             <button type="submit" className="btn btn-wide btn-primary">
               {loading && <span className="loading loading-spinner"></span>}
               Update Coin
