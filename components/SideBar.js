@@ -26,7 +26,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             }`}
           >
             <div>
-              <p>Home</p>
+              <p>Presales Dashboard</p>
             </div>
           </div>
         </Link>
@@ -39,7 +39,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             }`}
           >
             <div>
-              <p className="text-sm">Submitted Coins</p>
+              <p className="text-sm">Submitted Presales</p>
             </div>
           </div>
         </Link>
@@ -52,7 +52,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             }`}
           >
             <div>
-              <p className="text-sm">Approved Coins</p>
+              <p className="text-sm">Approved Presales</p>
             </div>
           </div>
         </Link>
@@ -65,7 +65,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             }`}
           >
             <div>
-              <p className="text-sm">Edit Coins</p>
+              <p className="text-sm">Edit Presales</p>
             </div>
           </div>
         </Link>
@@ -107,6 +107,34 @@ const SideBar = forwardRef(({ showNav }, ref) => {
           >
             <div>
               <p className="text-sm">Add Advert Banners</p>
+            </div>
+          </div>
+        </Link>
+
+        <Link href="/tokenrequests">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/tokenrequests"
+                ? "bg-orange-100 text-orange-500"
+                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+            }`}
+          >
+            <div>
+              <p className="text-sm">Token Requests</p>
+            </div>
+          </div>
+        </Link>
+
+        <Link href="/edittokens">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/edittokens"
+                ? "bg-orange-100 text-orange-500"
+                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+            }`}
+          >
+            <div>
+              <p className="text-sm">Edit Tokens</p>
             </div>
           </div>
         </Link>

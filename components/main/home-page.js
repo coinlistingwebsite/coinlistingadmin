@@ -52,7 +52,7 @@ const HomePage = ({ coins }) => {
       <div className="stats shadow">
         <div className="stat">
           <div className="stat-figure text-green-500"></div>
-          <div className="stat-title">Approved Coins</div>
+          <div className="stat-title">Approved Presales</div>
           <div className="stat-value">{approved.length}</div>
           <div className="stat-desc">
             <a href="/approvedcoins" className="underline">
@@ -63,7 +63,7 @@ const HomePage = ({ coins }) => {
 
         <div className="stat">
           <div className="stat-figure text-secondary"></div>
-          <div className="stat-title">Presales Coins</div>
+          <div className="stat-title">Presales</div>
           <div className="stat-value">{presales.length}</div>
           <div className="stat-desc">
             {" "}

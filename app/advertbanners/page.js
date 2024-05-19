@@ -10,7 +10,7 @@ import React from "react";
 export default async function AdvertBannersPage() {
   const banner = await fetchBanners();
 
-  console.log(banner);
+
 
   if (!banner)
     return (

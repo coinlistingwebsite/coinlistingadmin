@@ -2,68 +2,55 @@
 import React, { useState } from "react";
 
 import { editCoin } from "@/lib/editData";
+import { editToken } from "@/lib/editTokens";
 
-import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { Stack, Typography } from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import TimezonePlayground from "./changeTime";
-
-const ModalEdit = ({ coin }) => {
+const ModalTokenEdit = ({ coin }) => {
   const [loading, setLoading] = useState(false);
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-  const [change, setChange] = useState(false);
-
+  
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    const votes = formData.get("votes");
     const address = formData.get("address");
+    const logo = formData.get("logo");
     const platform = formData.get("platform");
-    const cmc_id = formData.get("cmc_id");
+    const announcement = formData.get("announcement");
     const description = formData.get("description");
-    const explorer = formData.get("explorer");
-    const facebook = formData.get("facebook");
     const source_code = formData.get("source_code");
     const technical_doc = formData.get("technical_doc");
     const reddit = formData.get("reddit");
     const twitter = formData.get("twitter");
     const website = formData.get("website");
-    const instagram = formData.get("instagram");
+    const chat = formData.get("chat");
     const youtube = formData.get("youtube");
-    const telegram = formData.get("telegram");
-    const telegramContact = formData.get("telegramContact");
-    const audit = formData.get("audit");
-    const doxx = formData.get("doxx");
-    const safu = formData.get("safu");
-    const kyc = formData.get("kyc");
+    const mobile_app = formData.get("mobile_app");
+    const linkedin = formData.get("linkedin");
+    const cex_name = formData.get("cex_name");
+    const cex_link = formData.get("cex_link");
+    const dex_name = formData.get("dex_name");
+    const dex_link = formData.get("dex_link");
 
     setLoading(true);
 
-    const response = await editCoin(
+    const response = await editToken(
       !address ? coin.contract_address : address,
-      !votes ? coin.votes : votes,
+      !logo ? coin.logo : logo,
       !platform ? coin.platform : platform,
-      !cmc_id ? coin.cmc_id : cmc_id,
-      !description ? coin.description : description,
-      !explorer ? coin.urls.explorer : explorer,
-      !facebook ? coin.urls.facebook : facebook,
+      !announcement ? coin.urls.announcement : announcement,
+      !description ? coin.full_description : description,
       !source_code ? coin.urls.source_code : source_code,
       !technical_doc ? coin.urls.technical_doc : technical_doc,
       !reddit ? coin.urls.reddit : reddit,
       !twitter ? coin.urls.twitter : twitter,
       !website ? coin.urls.website : website,
-      !instagram ? coin.urls.instagram : instagram,
+      !chat ? coin.urls.chat : chat,
       !youtube ? coin.urls.youtube : youtube,
-      !telegram ? coin.urls.telegram : telegram,
-      !telegramContact ? coin.urls.telegramContact : telegramContact,
-      !audit ? coin.urls.audit : audit,
-      !doxx ? coin.urls.doxx : doxx,
-      !safu ? coin.urls.safu : safu,
-      !kyc ? coin.urls.kyc : kyc,
-      !startDate ? coin.date_launched : Date.parse(startDate),
-      !endDate ? coin.date_launched : Date.parse(endDate),
+      !mobile_app ? coin.urls.mobile_app : mobile_app,
+      !linkedin ? coin.urls.linkedin : linkedin,
+      !cex_name ? coin.urls.cex_name : cex_name,
+      !cex_link ? coin.urls.cex_link : cex_link,
+      !dex_name ? coin.urls.dex_name : dex_name,
+      !dex_link ? coin.urls.dex_link : dex_link,
       coin
     );
 
@@ -86,19 +73,9 @@ const ModalEdit = ({ coin }) => {
           <img src={coin.logo} className="rounded-xl w-24 h-24" />
 
           <span className="my-auto text-2xl ml-5">
-            {coin.coinName}
+            {coin.project_name}
             <br />${coin.symbol}
-            {coin.presale ? (
-              <>
-                <br />
-                <div className="badge badge-sm badge-secondary">Presale</div>
-              </>
-            ) : (
-              <>
-                <br />
-                <div className="badge badge-sm badge-secondary">Token</div>
-              </>
-            )}
+            <div className="badge badge-sm badge-secondary">Token</div>
           </span>
         </div>
 
@@ -115,8 +92,8 @@ const ModalEdit = ({ coin }) => {
 
             <input
               type="text"
-              name="votes"
-              placeholder={`Edit Votes :  ${coin.votes || "No Votes"}`}
+              name="logo"
+              placeholder={`Edit Logo :  ${coin.logo || "No Logo"}`}
               className="input input-bordered w-full"
             />
           </div>
@@ -130,8 +107,10 @@ const ModalEdit = ({ coin }) => {
 
             <input
               type="text"
-              name="cmc_id"
-              placeholder={`CMC_ID :  ${coin.cmc_id || "No ID"}`}
+              name="announcement"
+              placeholder={`Announcement :  ${
+                coin.urls.announcement || "Empty"
+              }`}
               className="input input-bordered w-full"
             />
           </div>
@@ -139,24 +118,10 @@ const ModalEdit = ({ coin }) => {
             <textarea
               name="description"
               className="textarea textarea-bordered h-24 w-full"
-              placeholder={coin.description}
+              placeholder={coin.full_description}
             ></textarea>
           </div>
-          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
-            <input
-              type="text"
-              name="explorer"
-              placeholder={`Explorer :  ${coin.urls?.explorer || "Empty"}`}
-              className="input input-bordered w-full"
-            />
 
-            <input
-              type="text"
-              name="facebook"
-              placeholder={`Date Launched :  ${coin.urls.facebook || "Empty"}`}
-              className="input input-bordered w-full"
-            />
-          </div>
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
@@ -199,8 +164,8 @@ const ModalEdit = ({ coin }) => {
 
             <input
               type="text"
-              name="instagram"
-              placeholder={`Instagram :  ${coin.urls.instagram || "Empty"}`}
+              name="chat"
+              placeholder={`Telegram/Chat :  ${coin.urls.chat || "Empty"}`}
               className="input input-bordered w-full"
             />
           </div>
@@ -214,64 +179,51 @@ const ModalEdit = ({ coin }) => {
 
             <input
               type="text"
-              name="telegram"
-              placeholder={`Telegram :  ${coin.urls.telegram || "Empty"}`}
+              name="mobile_app"
+              placeholder={`Mobile App  :  ${coin.urls.mobile_app || "Empty"}`}
               className="input input-bordered w-full"
             />
           </div>
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
-              name="telegramContact"
-              placeholder={`Telegram Contact :  ${
-                coin.urls.telegramContact || "Empty"
-              }`}
+              name="linkedin"
+              placeholder={`Linkedin :  ${coin.urls.linkedin || "Empty"}`}
               className="input input-bordered w-full"
             />
 
             <input
               type="text"
-              name="audit"
-              placeholder={`Audit :  ${coin.urls.audit || "Empty"}`}
+              name="cex_name"
+              placeholder={`CEX NAME :  ${coin.urls.cex_name || "Empty"}`}
               className="input input-bordered w-full"
             />
           </div>
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
-              name="doxx"
-              placeholder={`Doxx :  ${coin.urls.doxx || "Empty"}`}
+              name="cex_link"
+              placeholder={`CEX LINK :  ${coin.urls.cex_link || "Empty"}`}
               className="input input-bordered w-full"
             />
 
             <input
               type="text"
-              name="Safu"
-              placeholder={`SAFU :  ${coin.urls.safu || "Empty"}`}
+              name="dex_name"
+              placeholder={`DEX NAME :  ${coin.urls.dex_name || "Empty"}`}
               className="input input-bordered w-full"
             />
           </div>
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
-              name="kyc"
-              placeholder={`KYC :  ${coin.urls.kyc || "Empty"}`}
+              name="dex_link"
+              placeholder={`DEX LINK :  ${coin.urls.dex_link || "Empty"}`}
               className="input input-bordered w-full"
             />
           </div>
           {/* Start of Row */}
-          <input type="checkbox" onChange={() => setChange(!change)} /> Adjust
-          Start and End Time of Presale
-          {change && (
-            <>
-              <TimezonePlayground
-                setStartDate={setStartDate}
-                setEndDate={setEndDate}
-                endDate={endDate}
-                startDate={startDate}
-              />
-            </>
-          )}
+
           <div className="mt-10">
             <button type="submit" className="btn btn-wide btn-primary">
               {loading && <span className="loading loading-spinner"></span>}
@@ -284,4 +236,4 @@ const ModalEdit = ({ coin }) => {
   );
 };
 
-export default ModalEdit;
+export default ModalTokenEdit;
