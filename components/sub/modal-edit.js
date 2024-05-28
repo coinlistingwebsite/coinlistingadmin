@@ -63,7 +63,7 @@ const ModalEdit = ({ coin }) => {
       !safu ? coin.urls.safu : safu,
       !kyc ? coin.urls.kyc : kyc,
       !startDate ? coin.date_launched : Date.parse(startDate),
-      !endDate ? coin.date_launched : Date.parse(endDate),
+      !endDate ? coin.date_end : Date.parse(endDate),
       coin
     );
 
