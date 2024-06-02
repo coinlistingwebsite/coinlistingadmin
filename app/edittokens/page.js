@@ -2,6 +2,9 @@ import EditToken from "@/components/tokens-component/edit-token";
 import { fetchTokens } from "@/lib/fetchData";
 import React from "react";
 
+
+export const dynamic = "force-dynamic";
+
 export default async function EditTokens() {
   const tokens = await fetchTokens();
 
