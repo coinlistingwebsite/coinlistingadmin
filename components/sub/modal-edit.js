@@ -39,6 +39,19 @@ const ModalEdit = ({ coin }) => {
     const safu = formData.get("safu");
     const kyc = formData.get("kyc");
 
+    // CEX 1
+    const cexname1 = formData.get("cexname1");
+    const cexlink1 = formData.get("cexlink1");
+    // CEX 2
+    const cexname2 = formData.get("cexname2");
+    const cexlink2 = formData.get("cexlink2");
+    // CEX 3
+    const cexname3 = formData.get("cexname3");
+    const cexlink3 = formData.get("cexlink3");
+    // CEX 4
+    const cexname4 = formData.get("cexname4");
+    const cexlink4 = formData.get("cexlink4");
+
     setLoading(true);
 
     const response = await editCoin(
@@ -64,7 +77,22 @@ const ModalEdit = ({ coin }) => {
       !kyc ? coin.urls.kyc : kyc,
       !startDate ? coin.date_launched : Date.parse(startDate),
       !endDate ? coin.date_end : Date.parse(endDate),
-      coin
+
+      !cexname1 ? coin.urls.cexname1 : cexname1,
+      !cexlink1 ? coin.urls.cexlink1 : cexlink1,
+     
+      !cexname2 ? coin.urls.cexname2 : cexname2,
+      !cexlink2 ? coin.urls.cexlink2 : cexlink2,
+      
+      
+      !cexname3 ? coin.urls.cexname3 : cexname3,
+      !cexlink3 ? coin.urls.cexlink3 : cexlink3,
+    
+      !cexname4 ? coin.urls.cexname4 : cexname4,
+      !cexlink4 ? coin.urls.cexlink4 : cexlink4,
+
+coin
+      
     );
 
     setLoading(false);
@@ -236,6 +264,71 @@ const ModalEdit = ({ coin }) => {
               className="input input-bordered w-full"
             />
           </div>
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="cexname1"
+              placeholder={`CEX Name 1 :  ${coin.urls.cexname1 || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="cexlink1"
+              placeholder={`CEX Link 1 :  ${coin.urls.cexlink1 || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="cexname2"
+              placeholder={`CEX Name 2 :  ${coin.urls.cexname2 || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="cexlink2"
+              placeholder={`CEX Link 2 :  ${coin.urls.cexlink2 || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="cexname3"
+              placeholder={`CEX Name 3 :  ${coin.urls.cexname3 || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="cexlink3"
+              placeholder={`CEX Link 3 :  ${coin.urls.cexlink3 || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
+            <input
+              type="text"
+              name="cexname4"
+              placeholder={`CEX Name 4 :  ${coin.urls.cexname4 || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+
+            <input
+              type="text"
+              name="cexlink4"
+              placeholder={`CEX Link 4 :  ${coin.urls.cexlink4 || "Empty"}`}
+              className="input input-bordered w-full"
+            />
+          </div>
+
+
+
+
+
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"

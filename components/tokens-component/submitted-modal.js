@@ -62,6 +62,8 @@ const SubmittedModal = ({ coin }) => {
 
     alert(message);
 
+    window.location.reload(true);
+
     // if (!resp) {
     //   alert("Error in sending alert");
     //   return;

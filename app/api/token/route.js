@@ -47,6 +47,36 @@ export async function POST(request) {
 
   ⛓️Chain: ${platform}
   ${coinData}
+
+
+
+
+  🔥🫎 🔥 ${name} listed on @BullishMarktCap 🎉
+
+  ⛓️Chain: ${platform}
+
+  🚧 Worldwide- Sale has Planned.
+  
+👉Buy link: ${launchpadURL}
+
+💥Target Exchanges: 
+
+🌖Description: 
+
+🎊Vote on Bullishmarketcap: https://www.bullishmarketcap.com/coins/butterflyinu167
+
+💧Chat Link: 
+💧Website:
+💧Twitter:
+
+
+
+
+
+
+
+
+
   `;
 
   try {

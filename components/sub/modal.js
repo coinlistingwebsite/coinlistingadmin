@@ -50,6 +50,8 @@ const Modal = ({ coin }) => {
         launchpad: coin.urls.launchpad || "BullishMarketCap",
         launchpadURL: coin.urls.launchpadURL || "https://bullishmarketcap.com",
         telegram: coin.urls.telegram || "https://t.me/BullishMarktCap",
+        cexlink1: coin.urls.cexlink1 || "https://t.me/BullishMarktCap",
+      
       }),
     });
 
