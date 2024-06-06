@@ -23,7 +23,6 @@ const Modal = ({ coin }) => {
     setLoading2(true);
 
     const { error, message, id } = await approveCoin(coin);
-
     let URL;
 
     if (coin.presale) {
@@ -42,7 +41,7 @@ const Modal = ({ coin }) => {
         logo: coin.logo,
         platform: coin.platform,
         symbol: coin.symbol,
-        //      id: id,
+        // id: coin.id,
         id: id,
         chart: coin.urls.chart,
         website: coin.urls.website,
@@ -50,8 +49,10 @@ const Modal = ({ coin }) => {
         launchpad: coin.urls.launchpad || "BullishMarketCap",
         launchpadURL: coin.urls.launchpadURL || "https://bullishmarketcap.com",
         telegram: coin.urls.telegram || "https://t.me/BullishMarktCap",
-        cexlink1: coin.urls.cexlink1 || "https://t.me/BullishMarktCap",
-      
+        cexlink1: coin.urls.cexlink1,
+        cexname1: coin.urls.cexname1,
+        description: coin.description,
+        twitter: coin.urls.twitter,
       }),
     });
 

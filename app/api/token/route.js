@@ -16,6 +16,9 @@ export async function POST(request) {
     contract,
     chart,
     website,
+    cexlink1,
+    description,
+    twitter,
   } = await request.json();
 
   let response = await axios.get(
@@ -39,18 +42,15 @@ export async function POST(request) {
     `;
   }
 
+  let cexInfo = "";
+
+  if (cexlink1) {
+    cexInfo = `
+    💥Target Exchanges: <a href=${cexlink1}>${cexname1}</a>
+    `;
+  }
+
   let message = `
-  <b>
-  💥 ${name} live on BullishMarketCap.
-  </b>
-  🔗 Contract : ${contract}
-
-  ⛓️Chain: ${platform}
-  ${coinData}
-
-
-
-
   🔥🫎 🔥 ${name} listed on @BullishMarktCap 🎉
 
   ⛓️Chain: ${platform}
@@ -59,23 +59,15 @@ export async function POST(request) {
   
 👉Buy link: ${launchpadURL}
 
-💥Target Exchanges: 
+${cexInfo}
 
-🌖Description: 
+🌖Description: ${description}
 
-🎊Vote on Bullishmarketcap: https://www.bullishmarketcap.com/coins/butterflyinu167
+🎊Vote on Bullishmarketcap: https://www.bullishmarketcap.com/coins/${id}
 
-💧Chat Link: 
-💧Website:
-💧Twitter:
-
-
-
-
-
-
-
-
+💧Chat Link: ${telegram.trim()}
+💧Website: ${website.trim()}
+💧Twitter: ${twitter.trim()}
 
   `;
 
@@ -86,57 +78,12 @@ export async function POST(request) {
     // Replace 'CHAT_ID' with the actual chat ID where you want to send the message
     const chatId = process.env.NEXT_PUBLIC_TOKEN_CHAT_ID;
 
+    // const chatId = 622872171;
+
     // Send the message with reply_keyboard
-    await bot.telegram.sendVideo(
-      chatId,
-      "https://firebasestorage.googleapis.com/v0/b/bmc-database-f73bd.appspot.com/o/TES%2FTESTING%2F2024-04-09%201.03.39%20PM.mp4?alt=media&token=4be8c6c0-a35e-4084-bec3-15c2407460df",
-      {
-        caption: message,
-        parse_mode: "html",
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: `⚡️ ${name} CHAT ⚡️`,
-                url: `${telegram.trim()}`,
-              },
-            ],
-
-            [
-              {
-                text: `💰Buy`,
-                url: `${launchpadURL.trim()}`,
-              },
-            ],
-            [
-              {
-                text: `🚦Chart`,
-                url: `${chart.trim()}`,
-              },
-            ],
-            [
-              {
-                text: `📍Website`,
-                url: `${website.trim()}`,
-              },
-            ],
-            [
-              {
-                text: `📥Vote`,
-                url: `https://www.bullishmarketcap.com/coins/${id}`,
-              },
-            ],
-
-            [
-              {
-                text: "🪬Join BMC",
-                url: `https://t.me/BullishMarktCap`,
-              },
-            ],
-          ],
-        },
-      }
-    );
+    await bot.telegram.sendMessage(chatId, message, {
+      parse_mode: "html",
+    });
 
     return NextResponse.json({ message: "Success" }, { status: 200 });
   } catch (error) {
