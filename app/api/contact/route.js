@@ -63,14 +63,10 @@ ${cexInfo}
     //   parse_mode: "html",
     // });
 
-    await bot.telegram.sendVideo(
-      chatId,
-      "https://firebasestorage.googleapis.com/v0/b/bmc-database-f73bd.appspot.com/o/TES%2FTESTING%2F2024-04-09%202.16.53%20PM.mp4?alt=media&token=7b6cea7e-d051-4bb1-90ae-27b7e2dbf855",
-      {
-        caption: message,
-        parse_mode: "html",
-      }
-    );
+    await bot.telegram.sendPhoto(chatId, logo, {
+      caption: message,
+      parse_mode: "html",
+    });
 
     return NextResponse.json({ message: "Success" }, { status: 200 });
   } catch (error) {
