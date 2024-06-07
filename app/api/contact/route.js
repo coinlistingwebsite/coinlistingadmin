@@ -16,36 +16,30 @@ export async function POST(request) {
     contract,
     chart,
     website,
+    cexname1,
     cexlink1,
     description,
     twitter,
   } = await request.json();
 
-  let cexInfo = "";
-
-  if (cexlink1) {
-    cexInfo = `
-    💥Target Exchanges: <a href=${cexlink1}>${cexname1}</a>
-    `;
-  }
-
   let message = `
   🔥🫎 🔥 ${name} listed on @BullishMarktCap 🎉
 
-  ⛓️Chain: ${platform}
+  ⛓️Chain: ${platform || ""}
 
   🚧 Worldwide- Sale has Planned.
   
-👉Buy link: ${launchpadURL}
+👉Buy link: ${launchpadURL || ""}
 
-${cexInfo}
-🌖Description: ${description}
+💥Target Exchanges: ${cexname1 || ""} -> ${cexlink1 || ""}
+
+🌖Description: ${description || ""}
 
 🎊Vote on Bullishmarketcap: https://www.bullishmarketcap.com/coins/${id}
 
-💧Chat Link: ${telegram.trim()}
-💧Website: ${website.trim()}
-💧Twitter: ${twitter.trim()}
+💧Chat Link: ${telegram.trim() || ""}
+💧Website: ${website.trim() || ""}
+💧Twitter: ${twitter.trim() || ""}
 
   `;
 
@@ -65,7 +59,7 @@ ${cexInfo}
 
     await bot.telegram.sendPhoto(chatId, logo, {
       caption: message,
-      parse_mode: "html",
+      // parse_mode: "html",
     });
 
     return NextResponse.json({ message: "Success" }, { status: 200 });

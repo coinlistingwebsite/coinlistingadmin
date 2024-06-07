@@ -22,7 +22,10 @@ const Modal = ({ coin }) => {
   const onApprove = async () => {
     setLoading2(true);
 
-    const { error, message, id } = await approveCoin(coin);
+    //  const { error, message, id } = await approveCoin(coin);
+    let error = false;
+    let message = "fish";
+    let id = coin.id;
     let URL;
 
     if (coin.presale) {
@@ -43,16 +46,17 @@ const Modal = ({ coin }) => {
         symbol: coin.symbol,
         // id: coin.id,
         id: id,
-        chart: coin.urls.chart,
-        website: coin.urls.website,
+        chart: coin.urls.chart || "https://bullishmarketcap.com",
+        website: coin.urls.website || "https://bullishmarketcap.com",
         contract: coin.contract_address,
         launchpad: coin.urls.launchpad || "BullishMarketCap",
         launchpadURL: coin.urls.launchpadURL || "https://bullishmarketcap.com",
         telegram: coin.urls.telegram || "https://t.me/BullishMarktCap",
-        cexlink1: coin.urls.cexlink1,
-        cexname1: coin.urls.cexname1,
-        description: coin.description,
-        twitter: coin.urls.twitter,
+        cexname1: coin.urls.cexname1 || "BMC",
+        cexlink1:
+          coin.urls.cexlink1 || `https://www.bullishmarketcap.com/coins/${id}`,
+        description: coin.description.substr(0, 300),
+        twitter: coin.urls.twitter || "https://x.com/BullishMarktCap",
       }),
     });
 
