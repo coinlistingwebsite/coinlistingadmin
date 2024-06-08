@@ -22,10 +22,7 @@ const Modal = ({ coin }) => {
   const onApprove = async () => {
     setLoading2(true);
 
-    //  const { error, message, id } = await approveCoin(coin);
-    let error = false;
-    let message = "fish";
-    let id = coin.id;
+      const { error, message, id } = await approveCoin(coin);
     let URL;
 
     if (coin.presale) {
