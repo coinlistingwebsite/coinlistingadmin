@@ -31,7 +31,7 @@ export async function POST(request) {
   
 👉Buy link: ${launchpadURL || ""}
 
-💥Target Exchanges: ${cexname1 || ""} -> ${cexlink1 || ""}
+💥Target Exchanges: ${cexname1 || ""} 
 
 🌖Description: ${description || ""}
 

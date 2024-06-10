@@ -7,10 +7,10 @@ import AdvertBannerSix from "@/components/advert-settings/advert-banner-6";
 import { fetchBanners } from "@/lib/fetchData";
 import React from "react";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdvertBannersPage() {
   const banner = await fetchBanners();
-
-
 
   if (!banner)
     return (

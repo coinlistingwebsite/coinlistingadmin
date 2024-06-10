@@ -22,43 +22,44 @@ const SubmittedModal = ({ coin }) => {
 
     let id = coin.request_id;
 
-    const { error, message } = await approveToken(coin);
+    // const { error, message } = await approveToken(coin);
 
-    // let URL;
-
-    // if (coin.presale) {
-    //   URL = "/api/contact";
-    // } else {
-    //   URL = "/api/token";
-    // }
-
-    // const resp = await fetch(URL, {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: coin.coinName,
-    //     logo: coin.logo,
-    //     platform: coin.platform,
-    //     symbol: coin.symbol,
-    //     //      id: id,
-    //     id: id,
-    //     chart: coin.urls.chart,
-    //     website: coin.urls.website,
-    //     contract: coin.contract_address,
-    //     launchpad: coin.urls.launchpad || "BullishMarketCap",
-    //     launchpadURL: coin.urls.launchpadURL || "https://bullishmarketcap.com",
-    //     telegram: coin.urls.telegram || "https://t.me/BullishMarktCap",
-    //   }),
-    // });
-
-    setLoading2(false);
+    let error = false;
+    let message = "";
 
     if (error) {
       alert(message);
       return;
     }
+
+    let URL = "/api/token";
+
+    const resp = await fetch(URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: coin.project_name,
+        logo: coin.logo,
+        platform: coin.platform,
+        symbol: coin.symbol,
+        id: id,
+        twitter: coin.urls.twitter,
+        website: coin.urls.website,
+        contract: coin.contract_address,
+        description: coin.full_description,
+        telegram: coin.urls.telegram || "https://t.me/BullishMarktCap",
+        cexname1: coin.urls.cex_name_1,
+        cexname2: coin.urls.cex_name_2,
+        cexname3: coin.urls.cex_name_3,
+        targetname1: coin.urls.cex_target_1,
+        targetname2: coin.urls.cex_target_2,
+        targetname3: coin.urls.cex_target_3,
+      }),
+    });
+
+    setLoading2(false);
 
     alert(message);
 

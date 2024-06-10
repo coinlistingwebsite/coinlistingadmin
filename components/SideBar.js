@@ -138,6 +138,19 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
+        <Link href="/cexbanners">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/cexbanners"
+                ? "bg-orange-100 text-orange-500"
+                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+            }`}
+          >
+            <div>
+              <p className="text-sm">CEX GATE Banners</p>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );

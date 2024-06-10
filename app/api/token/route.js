@@ -7,18 +7,20 @@ export async function POST(request) {
   const {
     name,
     logo,
-    symbol,
     platform,
+    symbol,
     id,
-    launchpad,
-    launchpadURL,
-    telegram,
-    contract,
-    chart,
-    website,
-    cexlink1,
-    description,
     twitter,
+    website,
+    contract,
+    description,
+    telegram,
+    cexname1,
+    cexname2,
+    cexname3,
+    targetname1,
+    targetname2,
+    targetname3,
   } = await request.json();
 
   let response = await axios.get(
@@ -42,32 +44,20 @@ export async function POST(request) {
     `;
   }
 
-  let cexInfo = "";
-
-  if (cexlink1) {
-    cexInfo = `
-    💥Target Exchanges: <a href=${cexlink1}>${cexname1}</a>
-    `;
-  }
-
   let message = `
-  🔥🫎 🔥 ${name} listed on @BullishMarktCap 🎉
+  🛸 ${name} listed on  CEX GATE (@cexgate).
+${coinData}
+🟢 Listed Exchanges: ${cexname1} ${cexname2} ${cexname3}
 
-  ⛓️Chain: ${platform}
+🚀 Target Exchanges: ${targetname1} ${targetname2} ${targetname3}
 
-  🚧 Worldwide- Sale has Planned.
-  
-👉Buy link: ${launchpadURL}
+⚡Description: ${description}
 
-${cexInfo}
+🗣 Community Link: https://www.cexgate.io/token/${id}
 
-🌖Description: ${description}
-
-🎊Vote on Bullishmarketcap: https://www.bullishmarketcap.com/coins/${id}
-
-💧Chat Link: ${telegram.trim()}
-💧Website: ${website.trim()}
-💧Twitter: ${twitter.trim()}
+🌏 Website: ${website.trim()}
+⚡ Twitter: ${twitter.trim()}
+💥 Telegram: ${telegram.trim()}
 
   `;
 
@@ -76,13 +66,12 @@ ${cexInfo}
     const bot = new Telegraf(process.env.NEXT_PUBLIC_TOKEN_BOT_ID);
 
     // Replace 'CHAT_ID' with the actual chat ID where you want to send the message
-    const chatId = process.env.NEXT_PUBLIC_TOKEN_CHAT_ID;
-
-    // const chatId = 622872171;
+    const chatId = process.env.NEXT_PUBLIC_CEX_GATE_CHAT_ID;
 
     // Send the message with reply_keyboard
-    await bot.telegram.sendMessage(chatId, message, {
-      parse_mode: "html",
+    await bot.telegram.sendPhoto(chatId, logo, {
+      caption: message,
+      //      parse_mode: "html",
     });
 
     return NextResponse.json({ message: "Success" }, { status: 200 });
