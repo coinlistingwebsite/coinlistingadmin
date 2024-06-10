@@ -22,10 +22,7 @@ const SubmittedModal = ({ coin }) => {
 
     let id = coin.request_id;
 
-    // const { error, message } = await approveToken(coin);
-
-    let error = false;
-    let message = "";
+    const { error, message } = await approveToken(coin);
 
     if (error) {
       alert(message);
