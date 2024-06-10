@@ -23,25 +23,29 @@ export async function POST(request) {
     targetname3,
   } = await request.json();
 
-  let response = await axios.get(
-    `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/historical?symbol=${symbol}&count=1`,
-    {
-      headers: {
-        "X-CMC_PRO_API_KEY": process.env.NEXT_PUBLIC_API_KEY,
-      },
-    }
-  );
-  const quote = response.data;
-
   let coinData = "";
 
-  if (quote.status.credit_count == 1) {
-    coinData = `
+  try {
+    let response = await axios.get(
+      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/historical?symbol=${symbol}&count=1`,
+      {
+        headers: {
+          "X-CMC_PRO_API_KEY": process.env.NEXT_PUBLIC_API_KEY,
+        },
+      }
+    );
+    const quote = response.data;
+
+    if (quote.status.credit_count == 1) {
+      coinData = `
 💵 Price : ${formatNumber(quote?.data.quotes[0].quote.USD.price)} USD
 💸 MarketCap : ${formatNumber(quote?.data.quotes[0].quote.USD.market_cap)}
 🪄 Total Supply : ${formatNumber(quote?.data.quotes[0].quote.USD.total_supply)}
 🔖 Volume 24H : ${formatNumber(quote?.data.quotes[0].quote.USD.volume_24h)}
     `;
+    }
+  } catch (error) {
+    console.log(error);
   }
 
   let message = `
