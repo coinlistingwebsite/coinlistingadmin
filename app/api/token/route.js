@@ -57,7 +57,7 @@ ${coinData}
 
 ⚡Description: ${description}
 
-🗣 Community Link: https://www.cexgate.io/token/${id}
+🗣 Cexgate.io : https://www.cexgate.io/token/${id}
 
 🌏 Website: ${website.trim()}
 ⚡ Twitter: ${twitter.trim()}
