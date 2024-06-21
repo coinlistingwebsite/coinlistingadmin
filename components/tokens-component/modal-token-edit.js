@@ -6,7 +6,7 @@ import { editToken } from "@/lib/editTokens";
 
 const ModalTokenEdit = ({ coin }) => {
   const [loading, setLoading] = useState(false);
-  
+
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -14,7 +14,7 @@ const ModalTokenEdit = ({ coin }) => {
     const address = formData.get("address");
     const logo = formData.get("logo");
     const platform = formData.get("platform");
-    const announcement = formData.get("announcement");
+    const votes = formData.get("votes");
     const description = formData.get("description");
     const source_code = formData.get("source_code");
     const technical_doc = formData.get("technical_doc");
@@ -36,7 +36,7 @@ const ModalTokenEdit = ({ coin }) => {
       !address ? coin.contract_address : address,
       !logo ? coin.logo : logo,
       !platform ? coin.platform : platform,
-      !announcement ? coin.urls.announcement : announcement,
+      !votes ? coin.votes : votes,
       !description ? coin.full_description : description,
       !source_code ? coin.urls.source_code : source_code,
       !technical_doc ? coin.urls.technical_doc : technical_doc,
@@ -106,11 +106,9 @@ const ModalTokenEdit = ({ coin }) => {
             />
 
             <input
-              type="text"
-              name="announcement"
-              placeholder={`Announcement :  ${
-                coin.urls.announcement || "Empty"
-              }`}
+              type="number"
+              name="votes"
+              placeholder={`Votes :  ${coin?.votes || "Empty"}`}
               className="input input-bordered w-full"
             />
           </div>
