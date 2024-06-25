@@ -28,7 +28,7 @@ const Modal = ({ coin }) => {
     if (coin.presale) {
       URL = "/api/contact";
     } else {
-      URL = "";
+      URL = "/api/contactToken";
     }
 
     const resp = await fetch(URL, {
