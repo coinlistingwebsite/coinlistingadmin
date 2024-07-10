@@ -48,7 +48,7 @@ export async function POST(request) {
     const bot = new Telegraf(process.env.NEXT_PUBLIC_BOT_ID);
 
     // Replace 'CHAT_ID' with the actual chat ID where you want to send the message
-    const chatId = process.env.NEXT_PUBLIC_CHAT_ID;
+    //   const chatId = process.env.NEXT_PUBLIC_CHAT_ID;
 
     // const chatId = 622872171;
 
