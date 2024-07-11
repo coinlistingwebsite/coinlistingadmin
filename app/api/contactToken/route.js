@@ -47,7 +47,7 @@ export async function POST(request) {
 
     // Replace 'CHAT_ID' with the actual chat ID where you want to send the message
  
-//    const chatId = process.env.NEXT_PUBLIC_CHAT_ID;
+   const chatId = process.env.NEXT_PUBLIC_CHAT_ID;
 
     // const chatId = 622872171;
 
