@@ -71,7 +71,7 @@ const Modal = ({ coin }) => {
       return;
     }
 
-    alert("Alert Succesfully sent");
+    alert("Alert Successfully sent");
   };
 
   const onDelete = async () => {

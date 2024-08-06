@@ -43,6 +43,35 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
+
+        <Link href="/submittedlisting">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/create"
+                ? "bg-orange-100 text-orange-500"
+                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+            }`}
+          >
+            <div>
+              <p className="text-sm">Submitted Listing</p>
+            </div>
+          </div>
+        </Link>
+
+        <Link href="/approvedlistings">
+          <div
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/orders"
+                ? "bg-orange-100 text-orange-500"
+                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+            }`}
+          >
+            <div>
+              <p className="text-sm">Approved Listing</p>
+            </div>
+          </div>
+        </Link>
+
         <Link href="/approvedcoins">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
@@ -56,6 +85,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
+
         <Link href="/editcoins">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
