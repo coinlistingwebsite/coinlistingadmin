@@ -25,6 +25,7 @@ const CatsModal = ({ coin }) => {
       body: JSON.stringify({
         name: coin.catName,
         logo: coin.logo,
+        tweetURL: coin.tweetURL,
         date_launched: coin.date_launched,
       }),
     });

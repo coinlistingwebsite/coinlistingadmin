@@ -8,10 +8,16 @@ const convertTimestamp = (timestamp) => {
 
 export async function POST(request) {
   try {
-    const { name, logo, date_launched } = await request.json();
+    const { name, logo, tweetURL, date_launched } = await request.json();
 
     let message = `
-🚀🐬🚀 ${name} Cat Launch  Announcement
+🐈 ${name} joined the competition.
+
+💥Holder Competition link : ${tweetURL}
+
+✨Send your dream PeiPei AI Cat join big competition. Earn SOL. 
+
+👉Submit your PeiPei CAT AI: www.peipeicatai.com
 `;
 
     const bot = new Telegraf(process.env.NEXT_PUBLIC_PPCAI_BOT);
