@@ -12,8 +12,7 @@ export async function POST(request) {
       await request.json();
 
     let message = `
-💎New Airdrop💎 ${name}  Coin Airdrop
-
+💎New Airdrop💎 ${name}  Airdrop
 
 🐬Airdrop  Link: ${buy_link}
 
