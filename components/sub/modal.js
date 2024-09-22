@@ -22,7 +22,7 @@ const Modal = ({ coin }) => {
   const onApprove = async () => {
     setLoading2(true);
 
-      const { error, message, id } = await approveCoin(coin);
+    const { error, message, id } = await approveCoin(coin);
     let URL;
 
     if (coin.presale) {
@@ -30,6 +30,11 @@ const Modal = ({ coin }) => {
     } else {
       URL = "/api/contactToken";
     }
+    alert("factor");
+    console.log("fish");
+    console.log(error, message, id);
+
+    return;
 
     const resp = await fetch(URL, {
       method: "POST",

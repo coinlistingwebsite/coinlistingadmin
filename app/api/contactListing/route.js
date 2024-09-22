@@ -12,11 +12,10 @@ export async function POST(request) {
       await request.json();
 
     let message = `
-🚀🐬🚀 ${name} Coin Launch  Announcement
+💎New Airdrop💎 ${name}  Coin Airdrop
 
-🔥 Launch time : ${convertTimestamp(date_launched)}
 
-🐬Trade Link: ${buy_link}
+🐬Airdrop  Link: ${buy_link}
 
 👉Chat: ${chat}
 `;
