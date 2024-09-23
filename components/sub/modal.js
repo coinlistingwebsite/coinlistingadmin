@@ -30,12 +30,7 @@ const Modal = ({ coin }) => {
     } else {
       URL = "/api/contactToken";
     }
-    alert("factor");
-    console.log("fish");
-    console.log(error, message, id);
-
-    return;
-
+    
     const resp = await fetch(URL, {
       method: "POST",
       headers: {
