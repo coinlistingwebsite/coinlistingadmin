@@ -7,7 +7,7 @@ export default function AllProducts({ products }) {
         <table className="table table-xs table-pin-rows table-pin-cols ">
           <thead>
             <tr>
-              <th>{""}</th>
+              <th></th>
               <td>Image</td>
               <td>Title</td>
               <td>Brand</td>
