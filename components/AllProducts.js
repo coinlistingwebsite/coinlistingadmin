@@ -14,7 +14,7 @@ export default function AllProducts({ products }) {
               <td>Units</td>
               <td>Delivery</td>
 
-              <th>{""}</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
