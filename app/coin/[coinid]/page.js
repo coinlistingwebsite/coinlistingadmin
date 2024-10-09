@@ -16,6 +16,7 @@ export default async function CoinEditPage({ params }) {
 
   return (
     <div className="py-10">
+    
       <ModalEdit coin={coinDetails} />
     </div>
   );

@@ -80,19 +80,17 @@ const ModalEdit = ({ coin }) => {
 
       !cexname1 ? coin.urls.cexname1 : cexname1,
       !cexlink1 ? coin.urls.cexlink1 : cexlink1,
-     
+
       !cexname2 ? coin.urls.cexname2 : cexname2,
       !cexlink2 ? coin.urls.cexlink2 : cexlink2,
-      
-      
+
       !cexname3 ? coin.urls.cexname3 : cexname3,
       !cexlink3 ? coin.urls.cexlink3 : cexlink3,
-    
+
       !cexname4 ? coin.urls.cexname4 : cexname4,
       !cexlink4 ? coin.urls.cexlink4 : cexlink4,
 
-coin
-      
+      coin
     );
 
     setLoading(false);
@@ -112,7 +110,6 @@ coin
       <div className="w-full">
         <div className="flex flex-row">
           <img src={coin.logo} className="rounded-xl w-24 h-24" />
-
           <span className="my-auto text-2xl ml-5">
             {coin.coinName}
             <br />${coin.symbol}
@@ -324,11 +321,6 @@ coin
               className="input input-bordered w-full"
             />
           </div>
-
-
-
-
-
           <div className="flex flex-col md:flex-row md:gap-x-5 w-full my-5">
             <input
               type="text"
