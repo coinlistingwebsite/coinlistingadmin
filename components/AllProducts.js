@@ -13,7 +13,6 @@ export default function AllProducts({ products }) {
               <td>Brand</td>
               <td>Units</td>
               <td>Delivery</td>
-
               <th></th>
             </tr>
           </thead>
@@ -39,7 +38,6 @@ export default function AllProducts({ products }) {
               </tr>
             ))}
           </tbody>
-         
         </table>
       </div>
     </>
