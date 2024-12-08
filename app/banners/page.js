@@ -36,20 +36,20 @@ export default async function CexBannerPage() {
         <BannerFour banner={banner.banner_4} />
         <BannerFive banner={banner.banner_5} />
         <BannerSix banner={banner.banner_6} />
-        <BannerSeven banner={banner.banner_7} />
+        {/* <BannerSeven banner={banner.banner_7} /> */}
       </div>
 
       <span className="badge badge-warning badge-lg my-10">
         CEX GATE Footer ADVERT BANNERS
       </span>
 
-      <div>
+      {/* <div>
         <BannerEight banner={banner.banner_8} />
 
         <br />
 
         <BannerNine banner={banner.banner_9} />
-      </div>
+      </div> */}
     </main>
   );
 }

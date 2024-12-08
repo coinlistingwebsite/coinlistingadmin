@@ -12,7 +12,11 @@ const SideBar = forwardRef(({ showNav }, ref) => {
     <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm">
       <div className="flex justify-center mt-6 mb-14">
         <picture>
-          <img className="w-32 h-auto" src="/logos/1.png" alt="company logo" />
+          <img
+            className="w-32 h-auto"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTijVxsDGHnesW0Sjg9MOXWomNC0kYDZglwwA&s"
+            alt="company logo"
+          />
         </picture>
       </div>
 
@@ -26,132 +30,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             }`}
           >
             <div>
-              <p>Presales Dashboard</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/submittedcats">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/create"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Submitted Cats</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/submittedcoins">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/create"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Submitted Presales</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/submittedlisting">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/create"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Submitted Listing</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/approvedlistings">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/orders"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Approved Listing</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/approvedcoins">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/orders"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Approved Presales</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/editcoins">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/orders"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Edit Presales</p>
-            </div>
-          </div>
-        </Link>
-        <Link href="/createmeetup">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/createmeetup"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Create Meetup</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/createnews">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/createnews"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Create News</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/advertbanners">
-          <div
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/advertbanners"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
-            }`}
-          >
-            <div>
-              <p className="text-sm">Add Advert Banners</p>
+              <p>Dashboard</p>
             </div>
           </div>
         </Link>
@@ -183,16 +62,16 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/cexbanners">
+        <Link href="/banners">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/cexbanners"
+              router.pathname == "/banners"
                 ? "bg-orange-100 text-orange-500"
                 : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
             }`}
           >
             <div>
-              <p className="text-sm">CEX GATE Banners</p>
+              <p className="text-sm">Banners</p>
             </div>
           </div>
         </Link>

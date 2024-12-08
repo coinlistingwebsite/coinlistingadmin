@@ -5,8 +5,8 @@ import Layout from "@/components/Layout";
 const inter = Montserrat({ subsets: ["cyrillic"] });
 
 export const metadata = {
-  title: "BullishMarketCap Admin Panel",
-  description: "Bullish Market Cap Admin Panel",
+  title: "Admin Panel",
+  description: "Admin Panel",
 };
 
 export default function RootLayout({ children }) {

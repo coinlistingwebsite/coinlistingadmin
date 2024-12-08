@@ -14,11 +14,7 @@ const BannerFour = ({ banner }) => {
     setLoading(true);
 
     try {
-      const bannerDoc = doc(
-        db,
-        "cexBanners",
-        process.env.NEXT_PUBLIC_CEX_BANNERS
-      );
+      const bannerDoc = doc(db, "banners", process.env.NEXT_PUBLIC_CEX_BANNERS);
 
       await updateDoc(bannerDoc, {
         banner_4: { logo: image, link: link },
