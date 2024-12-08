@@ -109,7 +109,7 @@ export default function TopBar({ showNav, setShowNav }) {
             <Menu.Button className="inline-flex w-full justify-center items-center">
               <picture>
                 <img
-                  src="/logos/1.png"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTijVxsDGHnesW0Sjg9MOXWomNC0kYDZglwwA&s"
                   className="rounded-full h-8 md:mr-4 border-2 border-white shadow-sm"
                   alt="profile picture"
                 />
