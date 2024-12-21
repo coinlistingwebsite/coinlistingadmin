@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import LanguageIcon from "@mui/icons-material/Language";
 import {
+  Email,
   Facebook,
   GitHub,
   Instagram,
@@ -58,7 +59,7 @@ const SubmittedModal = ({ coin }) => {
 
     setLoading2(false);
 
-   // alert(message);
+    // alert(message);
 
     window.location.reload(true);
 
@@ -85,6 +86,8 @@ const SubmittedModal = ({ coin }) => {
     alert("Token Deleted!");
     window.location.reload(true);
   };
+
+  console.log(coin);
 
   return (
     <>
@@ -121,40 +124,16 @@ const SubmittedModal = ({ coin }) => {
           {coin.platform}
         </div>
 
-        <div className="my-3">
-          <span className="badge badge-lg badge-accent">
-            Relationship with the Project
-          </span>{" "}
-          :{"  "}
-          {coin.relationship_project}
-        </div>
 
         <div className="my-3">
-          <span className="badge badge-lg badge-accent">Short Description</span>
-          <span className="text-md">{coin.short_description}</span>
-        </div>
-
-        <div className="my-3">
-          <span className="badge badge-lg badge-accent">Full Description</span>
+          <span className="badge badge-lg badge-accent">Description</span>
           <span className="text-md">{coin.full_description}</span>
         </div>
 
-        <div className="my-3">
-          <span className="badge badge-lg badge-accent mr-3">TAGS</span>
-          <span className="text-md">
-            {coin.tags.map((tag, index) => (
-              <span key={index}>{tag},</span>
-            ))}
-          </span>
-        </div>
+      
 
         <div className="my-3">
-          <span className="badge badge-lg badge-accent mr-3">Launch Date</span>
-          <span className="text-md">{coin.launch_date}</span>
-        </div>
-
-        <div className="my-3">
-          {coin.urls.chat && (
+          {coin?.urls?.chat && (
             <>
               <a
                 className="badge badge-accent badge-lg"
@@ -170,7 +149,7 @@ const SubmittedModal = ({ coin }) => {
         </div>
 
         <div className="my-3">
-          {coin.urls.website && (
+          {coin?.urls?.website && (
             <>
               <a
                 className="badge badge-accent badge-lg"
@@ -186,50 +165,23 @@ const SubmittedModal = ({ coin }) => {
         </div>
 
         <div className="my-3">
-          {coin.urls.website_2 && (
+          {coin?.email && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={coin.urls.website_2}
+                href={coin.email}
                 target="_blank"
               >
-                Website 2
-                <LanguageIcon className="ml-2" />
+                Email
+                <Email className="ml-2" />
               </a>{" "}
-              : {coin.urls.website_2}
+              : {coin.email}
             </>
           )}
         </div>
 
-        <div className="my-3">
-          {coin.urls.etherscan && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={coin.urls.etherscan}
-                target="_blank"
-              >
-                Etherscan
-              </a>{" "}
-              : {coin.urls.etherscan}
-            </>
-          )}
-        </div>
 
-        <div className="my-3">
-          {coin.urls.linkedin && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={coin.urls.linkedin}
-                target="_blank"
-              >
-                LINKEDIN
-              </a>{" "}
-              : {coin.urls.linkedin}
-            </>
-          )}
-        </div>
+      
 
         <div className="my-3">
           {coin.urls.twitter && (
@@ -247,101 +199,7 @@ const SubmittedModal = ({ coin }) => {
           )}
         </div>
 
-        <div className="my-3">
-          {coin.urls.facebook && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={coin.urls.facebook}
-                target="_blank"
-              >
-                Facebook
-                <Facebook className="ml-2" />
-              </a>{" "}
-              : {coin.urls.facebook}
-            </>
-          )}
-        </div>
-
-        <div className="my-3">
-          {coin.urls.reddit && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={`https://reddit.com/r/${coin.urls.reddit}`}
-                target="_blank"
-              >
-                Reddit URL
-                <Reddit className="ml-2" />
-              </a>{" "}
-              : {coin.urls.reddit}
-            </>
-          )}
-        </div>
-
-        <div className="my-3">
-          {coin.urls.source_code && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={coin.urls.source_code}
-                target="_blank"
-              >
-                Source Code
-                <GitHub className="ml-2" />
-              </a>{" "}
-              : {coin.urls.source_code}
-            </>
-          )}
-        </div>
-
-        <div className="my-3">
-          {coin.urls.technical_doc && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={coin.urls.technical_doc}
-                target="_blank"
-              >
-                Technical Doc
-                <GitHub className="ml-2" />
-              </a>{" "}
-              : {coin.urls.technical_doc}
-            </>
-          )}
-        </div>
-
-        <div className="my-3">
-          {coin.urls.mobile_app && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={coin.urls.mobile_app}
-                target="_blank"
-              >
-                Mobile App
-                <LanguageIcon className="ml-2" />
-              </a>{" "}
-              : {coin.urls.mobile_app}
-            </>
-          )}
-        </div>
-
-        <div className="my-3">
-          {coin.urls.youtube && (
-            <>
-              <a
-                className="badge badge-accent badge-lg"
-                href={coin.urls.youtube}
-                target="_blank"
-              >
-                Youtube
-                <YouTube className="ml-2" />
-              </a>{" "}
-              : {coin.urls.youtube}
-            </>
-          )}
-        </div>
+      
 
         <div className="my-3">
           {coin.urls.public_verification_post && (
