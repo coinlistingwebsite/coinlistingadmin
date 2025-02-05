@@ -30,7 +30,7 @@ const Modal = ({ coin }) => {
     } else {
       URL = "/api/contactToken";
     }
-    
+
     const resp = await fetch(URL, {
       method: "POST",
       headers: {
@@ -109,6 +109,7 @@ const Modal = ({ coin }) => {
     return dateString; // Output: "2021-03-17"
   };
 
+
   return (
     <>
       <div className="modal-box max-w-[800px]">
@@ -162,17 +163,17 @@ const Modal = ({ coin }) => {
         </div>
 
         <div className="my-3">
-          {coin.urls.telegramContact && (
+          {coin.urls.telegram_contact && (
             <>
               <a
                 className="badge badge-accent badge-lg"
-                href={coin.urls.telegramContact}
+                href={coin.urls.telegram_contact}
                 target="_blank"
               >
                 Contact via Telegram
                 <TelegramIcon className="ml-2" />
               </a>{" "}
-              : {coin.urls.telegramContact}
+              : {coin.urls.telegram_contact}
             </>
           )}
         </div>

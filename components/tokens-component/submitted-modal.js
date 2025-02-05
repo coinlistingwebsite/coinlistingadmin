@@ -30,45 +30,35 @@ const SubmittedModal = ({ coin }) => {
       return;
     }
 
-    // let URL = "/api/token";
+    let URL = "/api/token";
 
-    // const resp = await fetch(URL, {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: coin.project_name,
-    //     logo: coin.logo,
-    //     platform: coin.platform,
-    //     symbol: coin.symbol,
-    //     id: id,
-    //     twitter: coin.urls.twitter,
-    //     website: coin.urls.website,
-    //     contract: coin.contract_address,
-    //     description: coin.full_description,
-    //     telegram: coin.urls.telegram || "https://t.me/BullishMarktCap",
-    //     cexname1: coin.urls.cex_name_1,
-    //     cexname2: coin.urls.cex_name_2,
-    //     cexname3: coin.urls.cex_name_3,
-    //     targetname1: coin.urls.cex_target_1,
-    //     targetname2: coin.urls.cex_target_2,
-    //     targetname3: coin.urls.cex_target_3,
-    //   }),
-    // });
+    const resp = await fetch(URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        name: coin.project_name,
+        logo: coin.logo,
+        platform: coin.chain,
+        symbol: coin.symbol,
+        id: id,
+        twitter: coin.urls.twitter,
+      }),
+    });
 
     setLoading2(false);
 
-    // alert(message);
+    //    alert(message);
 
     window.location.reload(true);
 
-    // if (!resp) {
-    //   alert("Error in sending alert");
-    //   return;
-    // }
+    if (!resp) {
+      alert("Error in sending alert");
+      return;
+    }
 
-    //   alert("Alert Succesfully sent");
+    alert("Alert Succesfully sent");
   };
 
   const onDelete = async () => {
@@ -86,8 +76,6 @@ const SubmittedModal = ({ coin }) => {
     alert("Token Deleted!");
     window.location.reload(true);
   };
-
-  console.log(coin);
 
   return (
     <>
@@ -124,13 +112,10 @@ const SubmittedModal = ({ coin }) => {
           {coin.platform}
         </div>
 
-
         <div className="my-3">
           <span className="badge badge-lg badge-accent">Description</span>
           <span className="text-md">{coin.full_description}</span>
         </div>
-
-      
 
         <div className="my-3">
           {coin?.urls?.chat && (
@@ -180,8 +165,21 @@ const SubmittedModal = ({ coin }) => {
           )}
         </div>
 
-
-      
+        <div className="my-3">
+          {coin.urls.telegram_contact && (
+            <>
+              <a
+                className="badge badge-accent badge-lg"
+                href={coin.urls.telegram_contact}
+                target="_blank"
+              >
+                Contact via Telegram
+                <TelegramIcon className="ml-2" />
+              </a>{" "}
+              : {coin.urls.telegram_contact}
+            </>
+          )}
+        </div>
 
         <div className="my-3">
           {coin.urls.twitter && (
@@ -198,8 +196,6 @@ const SubmittedModal = ({ coin }) => {
             </>
           )}
         </div>
-
-      
 
         <div className="my-3">
           {coin.urls.public_verification_post && (

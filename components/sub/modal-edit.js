@@ -3,9 +3,7 @@ import React, { useState } from "react";
 
 import { editCoin } from "@/lib/editData";
 
-import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { Stack, Typography } from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import TimezonePlayground from "./changeTime";
 
 const ModalEdit = ({ coin }) => {
